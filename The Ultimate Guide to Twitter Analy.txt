@@ -1,0 +1,299 @@
+The Ultimate Guide to Twitter Analytics with an API (2025)
+Go beyond the basics. Learn how to leverage the power of an API to build custom Twitter analytics dashboards, track competitors, and uncover insights the standard tools miss.
+
+Why Use an API for Twitter Analytics?
+While the native Twitter Analytics dashboard provides a decent overview, it's a one-size-fits-all solution. For deep, actionable insights, you need control. An API (Application Programming Interface) gives you direct access to raw Twitter data, allowing you to:
+
+Build Custom Dashboards: Track the specific metrics that matter to your business, not just the ones Twitter shows you.
+Analyze Competitors: Monitor your competitors' performance, engagement strategies, and audience growth in real-time.
+Perform Sentiment Analysis: Understand the emotion behind brand mentions and customer feedback at scale.
+Integrate with Other Tools: Pipe Twitter data directly into your BI tools, CRM, or data warehouses like BigQuery and Snowflake.
+Bypass Limitations: Access historical data and perform complex queries that are impossible with the standard interface.
+In short, using an API like TwitterAPI.io transforms Twitter from a social network into a rich, queryable database for strategic decision-making.
+
+Key Twitter Analytics Metrics to Track with an API
+With API access, you can track a vast array of metrics. Here are some of the most crucial ones for a comprehensive analytics strategy:
+
+Audience Metrics
+Follower Growth Over Time
+Follower/Following Ratio
+Audience Demographics (Location, Language)
+Identification of Top Followers/Influencers
+Engagement Metrics
+Likes, Retweets, Replies, Quotes per Tweet
+Engagement Rate (Total Engagements / Impressions)
+Most Engaging Tweet Types (Text, Image, Video, Poll)
+Best Times to Post for Maximum Engagement
+Content & Sentiment
+Hashtag Performance and Reach
+Brand Mention Volume and Sentiment (Positive, Neutral, Negative)
+Keyword and Topic Analysis
+URL Click-Through Rates
+Competitive Analysis
+Competitor Follower Growth
+Competitor Engagement Rates
+Share of Voice for Key Topics
+Analysis of Competitors' Top-Performing Content
+How to Build a Twitter Analytics Tool: A Practical Guide
+Let's get practical. Here’s a simple, step-by-step guide to start fetching Twitter data for your analytics using Python and TwitterAPI.io.
+
+Step 1: Get Your TwitterAPI.io Key
+Before you can do anything, you need API access. Our service is designed to be simple and affordable.
+
+Get Your API Key Now (Need Login)
+Step 2: Set Up Your Python Environment
+Ensure you have Python installed. The only library you need to get started is `requests` for making HTTP calls. You can install it via pip:
+
+pip install requests
+Step 3: Fetching Twitter Data (Code Examples)
+With your API key, you can start pulling data immediately. Here’s how to fetch a user's profile information.
+
+import requests
+
+api_key = 'YOUR_API_KEY'
+username = 'twitterdev'
+url = f'https://api.twitterapi.io/twitter/user/info?userName={username}'
+
+headers = {
+    'x-api-key': f'{api_key}'
+}
+
+response = requests.get(url, headers=headers)
+
+if response.status_code == 200:
+    user_data = response.json()
+    print(user_data)
+else:
+    print(f"Error: {response.status_code}")
+    print(response.text)
+Now, let's perform a more advanced query to search for recent tweets containing specific hashtags. This is the foundation of trend and brand monitoring.
+
+import requests
+
+api_key = 'YOUR_API_KEY'
+query = '#AI OR #ArtificialIntelligence'
+url = f'https://api.twitterapi.io/twitter/tweet/advanced_search?query={query}'
+
+headers = {
+    'x-api-key': f'{api_key}'
+}
+
+response = requests.get(url, headers=headers)
+
+if response.status_code == 200:
+    tweets = response.json()
+    # Process your tweets here
+    for tweet in tweets.get('tweets', []):
+        print(f"@{tweet['author']['userName']}: {tweet['text']}\n")
+else:
+    print(f"Error: {response.status_code}")
+Step 4: Analyzing and Visualizing the Data
+Once you have the data in JSON format, the possibilities are endless. You can use powerful Python libraries to process and visualize it:
+
+Pandas: For organizing the data into dataframes, cleaning it, and performing complex calculations (e.g., engagement rates).
+Matplotlib & Seaborn: For creating charts and graphs to visualize trends, such as follower growth over time or engagement by tweet type.
+NLTK or TextBlob: For performing sentiment analysis on tweet text to gauge public opinion.
+By combining these tools with the data from TwitterAPI.io, you can build a fully functional, custom analytics dashboard tailored to your exact needs.
+
+Why TwitterAPI.io is the Best Choice for Analytics
+Building a reliable analytics tool requires a reliable API. Here’s why developers and businesses choose us:
+
+Unmatched Cost-Effectiveness
+Get access to comprehensive data at a fraction of the cost of the official API's high-tier plans. Our pay-as-you-go model means you only pay for what you use.
+
+High Performance & Rate Limits
+With support for up to 200 QPS and an average response time of 500-800ms, our API is built for scalable, real-time applications.
+
+Complete Data Access
+From user profiles and followers to advanced tweet search and historical data, our endpoints cover the full spectrum of Twitter data needed for deep analysis.
+
+Simple & Well-Documented
+Our API follows standard REST principles and is easy to integrate. Check out our comprehensive documentation to get started in minutes.
+
+
+Tweet Endpoint
+Advanced Search
+Advanced search for tweets.Each page returns up to 20 replies(Sometimes less than 20,because we will filter out ads or other not tweets). Use cursor for pagination.
+
+GET
+/
+twitter
+/
+tweet
+/
+advanced_search
+
+Try it
+Authorizations
+​
+X-API-Key
+stringheaderrequired
+Query Parameters
+​
+query
+string<string>required
+The query to search for.eg. "AI" OR "Twitter" from:elonmusk since:2021-12-31_23:59:59_UTC . Get more examples from https://github.com/igorbrigadir/twitter-advanced-search
+
+​
+queryType
+enum<string>default:Latestrequired
+The query type to search for.eg. "Latest" OR "Top"
+
+Available options: Latest, Top 
+​
+cursor
+string<string>
+The cursor to paginate through the results. First page is "".
+
+Response
+200
+
+200
+application/json
+Tweets response
+
+​
+tweets
+object[]required
+Array of tweets
+
+Show child attributes
+
+​
+has_next_page
+booleanrequired
+Indicates if there are more results available
+
+​
+next_cursor
+stringrequired
+Cursor for fetching the next page of results
+
+curl --request GET \
+  --url https://api.twitterapi.io/twitter/tweet/advanced_search \
+  --header 'X-API-Key: <api-key>'
+
+{
+  "tweets": [
+    {
+      "type": "tweet",
+      "id": "<string>",
+      "url": "<string>",
+      "text": "<string>",
+      "source": "<string>",
+      "retweetCount": 123,
+      "replyCount": 123,
+      "likeCount": 123,
+      "quoteCount": 123,
+      "viewCount": 123,
+      "createdAt": "<string>",
+      "lang": "<string>",
+      "bookmarkCount": 123,
+      "isReply": true,
+      "inReplyToId": "<string>",
+      "conversationId": "<string>",
+      "inReplyToUserId": "<string>",
+      "inReplyToUsername": "<string>",
+      "author": {
+        "type": "user",
+        "userName": "<string>",
+        "url": "<string>",
+        "id": "<string>",
+        "name": "<string>",
+        "isBlueVerified": true,
+        "verifiedType": "<string>",
+        "profilePicture": "<string>",
+        "coverPicture": "<string>",
+        "description": "<string>",
+        "location": "<string>",
+        "followers": 123,
+        "following": 123,
+        "canDm": true,
+        "createdAt": "<string>",
+        "favouritesCount": 123,
+        "hasCustomTimelines": true,
+        "isTranslator": true,
+        "mediaCount": 123,
+        "statusesCount": 123,
+        "withheldInCountries": [
+          "<string>"
+        ],
+        "affiliatesHighlightedLabel": {},
+        "possiblySensitive": true,
+        "pinnedTweetIds": [
+          "<string>"
+        ],
+        "isAutomated": true,
+        "automatedBy": "<string>",
+        "unavailable": true,
+        "message": "<string>",
+        "unavailableReason": "<string>",
+        "profile_bio": {
+          "description": "<string>",
+          "entities": {
+            "description": {
+              "urls": [
+                {
+                  "display_url": "<string>",
+                  "expanded_url": "<string>",
+                  "indices": [
+                    123
+                  ],
+                  "url": "<string>"
+                }
+              ]
+            },
+            "url": {
+              "urls": [
+                {
+                  "display_url": "<string>",
+                  "expanded_url": "<string>",
+                  "indices": [
+                    123
+                  ],
+                  "url": "<string>"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "entities": {
+        "hashtags": [
+          {
+            "indices": [
+              123
+            ],
+            "text": "<string>"
+          }
+        ],
+        "urls": [
+          {
+            "display_url": "<string>",
+            "expanded_url": "<string>",
+            "indices": [
+              123
+            ],
+            "url": "<string>"
+          }
+        ],
+        "user_mentions": [
+          {
+            "id_str": "<string>",
+            "name": "<string>",
+            "screen_name": "<string>"
+          }
+        ]
+      },
+      "quoted_tweet": {},
+      "retweeted_tweet": {}
+    }
+  ],
+  "has_next_page": true,
+  "next_cursor": "<string>"
+}
+
+{
+  "error": 123,
+  "message": "<string>"
+}

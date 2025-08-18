@@ -1,0 +1,105 @@
+{
+  "trend_count": 2,
+  "results": [
+    {
+      "title": "AI助手加速开发流程",
+      "summary": "用户报告使用AI助手在创建全栈应用、文案和游戏开发中显著节省时间，尽管它还不是完美的替代品。",
+      "hot_score": 85.0,
+      "category": "技术创新",
+      "insights": {
+        "pain_points": [
+          {
+            "text": "AI助手未能完全替代创意工作和核心逻辑开发"
+          }
+        ],
+        "opportunities": [
+          {
+            "text": "为早期创业公司和独立开发者提供快速原型开发和支持"
+          }
+        ],
+        "mvp_plan": {
+          "goal": "在一周内实现针对特定开发任务的AI辅助工具，以验证市场需求和产品可行性"
+        }
+      },
+      "emotion_analysis": {
+        "joy": 60,
+        "neutral": 20,
+        "anger": 10,
+        "sadness": 5,
+        "sarcasm": 5
+      },
+      "top_mentions": [
+        {
+          "platform": "twitter",
+          "author": "dev_guru",
+          "text": "Just tried an AI agent to build a full-stack app. It's not perfect, but it finished 80% of the boilerplate. The future is here.",
+          "url": "https://twitter.com/dev_guru/status/1",
+          "likes": 1200,
+          "sentiment": "Positive"
+        },
+        {
+          "platform": "reddit",
+          "author": "startup_founder",
+          "text": "We used an AI agent to generate our landing page copy and initial user onboarding flow. Saved us about a week of work. Highly recommend for early-stage startups.",
+          "url": "https://reddit.com/r/startups/comments/2",
+          "likes": 800,
+          "sentiment": "Positive"
+        },
+        {
+          "platform": "reddit",
+          "author": "hobby_coder",
+          "text": "I built a small game using an AI agent assistant. It was great for finding bugs and writing tests, but the core game logic still needed my creative input. It's a collaborator, not a replacement.",
+          "url": "https://reddit.com/r/gamedev/comments/3",
+          "likes": 250,
+          "sentiment": "Positive"
+        }
+      ]
+    },
+    {
+      "title": "AI Agents: Hype or the Future of Productivity?",
+      "summary": "Social media discussions reveal mixed perceptions about the capabilities and potential of AI agents, with some highlighting limitations while others foresee revolutionary productivity gains.",
+      "hot_score": 85.0,
+      "category": "技术创新",
+      "insights": {
+        "pain_points": [
+          {
+            "text": "The inability of AI agents to handle complex logic and custom requirements is a major concern for users."
+          }
+        ],
+        "opportunities": [
+          {
+            "text": "There's a potential for a billion-dollar company by effectively leveraging AI agents to increase productivity."
+          }
+        ],
+        "mvp_plan": {
+          "goal": "In one week, develop a prototype AI agent that can address custom requirements to demonstrate its potential in a specific industry."
+        }
+      },
+      "emotion_analysis": {
+        "joy": 20,
+        "neutral": 30,
+        "anger": 15,
+        "sadness": 10,
+        "sarcasm": 25
+      },
+      "top_mentions": [
+        {
+          "platform": "twitter",
+          "author": "skeptic_dev",
+          "text": "These AI agents are just fancy script runners. They can't handle complex logic or custom requirements. Still a long way to go.",
+          "url": "https://twitter.com/skeptic_dev/status/2",
+          "likes": 450,
+          "sentiment": "Positive"
+        },
+        {
+          "platform": "twitter",
+          "author": "vc_insights",
+          "text": "The next billion-dollar company will be built by a founder leveraging a team of AI agents, not human employees. The productivity gains are astronomical.",
+          "url": "https://twitter.com/vc_insights/status/3",
+          "likes": 5000,
+          "sentiment": "Positive"
+        }
+      ]
+    }
+  ]
+}

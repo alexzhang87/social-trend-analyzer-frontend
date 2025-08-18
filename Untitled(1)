@@ -1,0 +1,14 @@
+# 1. 清除可能的锁定文件
+del .git\index.lock
+
+# 2. 重新添加文件
+git add .
+
+# 3. 创建提交
+git commit -m "Initial commit: Social Trend Analyzer with Railway deployment config"
+
+# 4. 添加远程仓库（替换 YOUR_USERNAME 为您的 GitHub 用户名）
+git remote add origin https://github.com/YOUR_USERNAME/social-trend-analyzer.git
+
+# 5. 推送到 GitHub
+git push -u origin main

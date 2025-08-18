@@ -1,0 +1,50 @@
+[
+  {
+    "platform": "twitter",
+    "author": "dev_guru",
+    "text": "Just tried an AI agent to build a full-stack app. It's not perfect, but it finished 80% of the boilerplate. The future is here.",
+    "url": "https://twitter.com/dev_guru/status/1",
+    "likes": 1200,
+    "created_at": "2025-08-14T10:00:00Z"
+  },
+  {
+    "platform": "twitter",
+    "author": "skeptic_dev",
+    "text": "These AI agents are just fancy script runners. They can't handle complex logic or custom requirements. Still a long way to go.",
+    "url": "https://twitter.com/skeptic_dev/status/2",
+    "likes": 450,
+    "created_at": "2025-08-14T11:00:00Z"
+  },
+  {
+    "platform": "reddit",
+    "author": "ProductHuntFan",
+    "text": "r/programming - Discussion on Devin, the AI software engineer. Is this the end of programming jobs? Some say yes, some say it's just a powerful new tool.",
+    "url": "https://reddit.com/r/programming/comments/1",
+    "likes": 3000,
+    "created_at": "2025-08-13T15:00:00Z"
+  },
+  {
+    "platform": "reddit",
+    "author": "startup_founder",
+    "text": "We used an AI agent to generate our landing page copy and initial user onboarding flow. Saved us about a week of work. Highly recommend for early-stage startups.",
+    "url": "https://reddit.com/r/startups/comments/2",
+    "likes": 800,
+    "created_at": "2025-08-15T09:00:00Z"
+  },
+  {
+    "platform": "twitter",
+    "author": "vc_insights",
+    "text": "The next billion-dollar company will be built by a founder leveraging a team of AI agents, not human employees. The productivity gains are astronomical.",
+    "url": "https://twitter.com/vc_insights/status/3",
+    "likes": 5000,
+    "created_at": "2025-08-15T12:00:00Z"
+  },
+  {
+    "platform": "reddit",
+    "author": "hobby_coder",
+    "text": "I built a small game using an AI agent assistant. It was great for finding bugs and writing tests, but the core game logic still needed my creative input. It's a collaborator, not a replacement.",
+    "url": "https://reddit.com/r/gamedev/comments/3",
+    "likes": 250,
+    "created_at": "2025-08-12T18:00:00Z"
+  }
+]
