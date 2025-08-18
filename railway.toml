@@ -1,0 +1,20 @@
+[build]
+builder = "dockerfile"
+dockerfilePath = "backend/Dockerfile"
+buildCommand = "echo 'Building Python backend'"
+
+[deploy]
+healthcheckPath = "/health"
+healthcheckTimeout = 300
+restartPolicyType = "on_failure"
+restartPolicyMaxRetries = 10
+startCommand = "cd backend && uvicorn app.main:app --host 0.0.0.0 --port $PORT"
+
+[[services]]
+name = "social-trend-analyzer-api"
+
+[services.variables]
+# 这些环境变量将在 Railway 控制台中设置
+# ZHIPU_API_KEY = "your_zhipu_api_key"
+# TWITTERAPI_IO_KEY = "your_twitter_api_key"
+# DATABASE_URL = "sqlite:///./app.db"
