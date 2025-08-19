@@ -69,3 +69,7 @@ build/
 # Temporary files
 *.tmp
 *.temp
+
+# Allow frontend src/lib to be tracked (override "lib/" ignore)
+!social-trend-analyzer/src/lib/
+!social-trend-analyzer/src/lib/**
