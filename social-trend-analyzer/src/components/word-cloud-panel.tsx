@@ -1,25 +1,11 @@
 import { useMemo } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { TrendCluster } from "./trend-analyzer";
-import WordCloud from "react-wordcloud";
-import 'tippy.js/dist/tippy.css';
-import 'tippy.js/animations/scale.css';
+import WordCloud from 'react-d3-cloud';
 
 interface WordCloudPanelProps {
   data: TrendCluster[];
 }
-
-const options: any = {
-  rotations: 2,
-  rotationAngles: [0, 0],
-  fontSizes: [14, 48],
-  padding: 2,
-  enableTooltip: true,
-  tooltipOptions: {
-    animation: 'scale',
-    theme: 'light',
-  }
-};
 
 export function WordCloudPanel({ data }: WordCloudPanelProps) {
   const words = useMemo(() => {
@@ -32,7 +18,7 @@ export function WordCloudPanel({ data }: WordCloudPanelProps) {
         wordMap.set(keyword, (wordMap.get(keyword) || 0) + 1);
       });
     });
-    // Multiply value for better visual scaling in the cloud
+    // react-d3-cloud expects data in the format { text: string, value: number }
     return Array.from(wordMap.entries()).map(([text, value]) => ({ text, value: value * 10 }));
   }, [data]);
 
@@ -51,6 +37,9 @@ export function WordCloudPanel({ data }: WordCloudPanelProps) {
     );
   }
 
+  const fontSizeMapper = (word: { value: number }) => Math.log2(word.value) * 5 + 16;
+  const rotate = () => (Math.random() - 0.5) * 30;
+
   return (
     <Card>
       <CardHeader>
@@ -59,7 +48,15 @@ export function WordCloudPanel({ data }: WordCloudPanelProps) {
       <CardContent>
         <div className="h-64 w-full">
           {words.length > 0 ? (
-            <WordCloud words={words} options={options} />
+            <WordCloud
+              data={words}
+              width={500}
+              height={250}
+              font="Inter"
+              fontSize={fontSizeMapper}
+              rotate={rotate}
+              padding={5}
+            />
           ) : (
             <div className="flex items-center justify-center h-full text-muted-foreground">
               No keywords to display
