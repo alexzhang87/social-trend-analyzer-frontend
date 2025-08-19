@@ -1,1 +1,1 @@
-declare module 'react-wordcloud';
+declare module 'react-d3-cloud';
