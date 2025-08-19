@@ -1,5 +1,5 @@
-# 使用 Python 3.11 官方镜像
-FROM python:3.11-slim
+# 使用 Python 3.11 官方镜像 (标准版，包含更多构建工具)
+FROM python:3.11
 
 # 设置工作目录
 WORKDIR /app
