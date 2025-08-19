@@ -9,6 +9,7 @@ export default defineConfig({
     alias: {
       "@": path.resolve(__dirname, "./src"),
       "@/lib": path.resolve(__dirname, "./src/lib"),
+      "@/lib/utils": path.resolve(__dirname, "./src/lib/utils"),
     },
   },
   build: {
