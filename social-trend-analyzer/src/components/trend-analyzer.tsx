@@ -72,7 +72,7 @@ const mapApiDataToTrendClusters = (apiResults: any[]): TrendCluster[] => {
     category: result.category || "Uncategorized",
     hot_score: result.hot_score || 0,
     // Extract platforms from the top mentions provided by the backend
-    platforms: [...new Set(result.top_mentions?.map((m: any) => m.platform).filter(Boolean) || [])],
+    platforms: [...new Set(result.top_mentions?.map((m: any) => m.platform).filter(Boolean) || [])] as string[],
     // Extract keywords from pain points and opportunities
     keywords: [
       ...(result.insights?.pain_points?.map((p: any) => p.text.split(' ')[0]) || []),
@@ -141,8 +141,9 @@ export function TrendAnalyzer() {
     const query = filters.keyword.trim() || "AI in marketing";
     
     try {
-      // Corrected API endpoint and method to the new one for debugging
-      const response = await fetch(`http://127.0.0.1:8000/api/analyze-trends/?query=${encodeURIComponent(query)}`, {
+      // Use environment variable for API base URL, fallback to localhost for development
+      const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8000';
+      const response = await fetch(`${apiBaseUrl}/api/analyze-trends/?query=${encodeURIComponent(query)}`, {
         method: 'GET',
       });
 
