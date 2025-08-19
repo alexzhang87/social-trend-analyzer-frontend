@@ -5,3 +5,4 @@ python-dotenv
 zhipuai
 pydantic
 python-multipart
+pydantic-settings
