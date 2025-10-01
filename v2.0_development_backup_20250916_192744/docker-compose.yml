@@ -1,0 +1,96 @@
+version: '3.8'
+
+services:
+  # 前端服务
+  frontend:
+    build:
+      context: ./social-trend-analyzer
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - REACT_APP_API_URL=http://localhost:8000
+    volumes:
+      - ./social-trend-analyzer:/app
+      - /app/node_modules
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+  # 后端服务
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://postgres:password@postgres:5432/social_trends
+      - REDIS_URL=redis://redis:6379
+      - SECRET_KEY=your-secret-key-change-in-production
+      - DEBUG=true
+      - CORS_ORIGINS=http://localhost:3000,http://localhost:3001
+    env_file:
+      - ./backend/.env
+    volumes:
+      - ./backend:/app
+      - backend-data:/app/data
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - app-network
+
+  # PostgreSQL 数据库
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_DB=social_trends
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./backend/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+    networks:
+      - app-network
+
+  # Redis 缓存
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    command: redis-server --appendonly yes
+    networks:
+      - app-network
+
+  # Nginx 反向代理（生产环境）
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./ssl:/etc/nginx/ssl
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - app-network
+    profiles:
+      - production
+
+volumes:
+  postgres-data:
+  redis-data:
+  backend-data:
+
+networks:
+  app-network:
+    driver: bridge

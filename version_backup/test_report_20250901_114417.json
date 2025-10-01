@@ -1,0 +1,169 @@
+{
+  "summary": {
+    "total_tests": 13,
+    "passed_tests": 2,
+    "failed_tests": 11,
+    "success_rate": 15.384615384615385
+  },
+  "test_results": [
+    {
+      "test_name": "健康检查端点",
+      "success": false,
+      "details": "",
+      "error": "HTTPConnectionPool(host='localhost', port=8001): Max retries exceeded with url: /api/v1/health (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000156CD7D1460>: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。'))",
+      "timestamp": "2025-09-01T11:43:35.465105"
+    },
+    {
+      "test_name": "认证端点",
+      "success": false,
+      "details": "",
+      "error": "HTTPConnectionPool(host='localhost', port=8001): Max retries exceeded with url: /api/v1/auth/register (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000156CD7D1F70>: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。'))",
+      "timestamp": "2025-09-01T11:43:39.544694"
+    },
+    {
+      "test_name": "趋势分析端点",
+      "success": false,
+      "details": "",
+      "error": "HTTPConnectionPool(host='localhost', port=8001): Max retries exceeded with url: /api/v1/trends/comprehensive-analysis (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000156CD7EFA00>: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。'))",
+      "timestamp": "2025-09-01T11:43:43.625109"
+    },
+    {
+      "test_name": "Google Trends端点",
+      "success": false,
+      "details": "",
+      "error": "HTTPConnectionPool(host='localhost', port=8001): Max retries exceeded with url: /api/v1/google-trends/search?keywords=AI,%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000156CD7D1430>: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。'))",
+      "timestamp": "2025-09-01T11:43:47.746884"
+    },
+    {
+      "test_name": "MonkeyLearn端点",
+      "success": false,
+      "details": "",
+      "error": "HTTPConnectionPool(host='localhost', port=8001): Max retries exceeded with url: /api/v1/monkeylearn/comprehensive-analysis (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000156CD7EF910>: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。'))",
+      "timestamp": "2025-09-01T11:43:51.833801"
+    },
+    {
+      "test_name": "管理员端点",
+      "success": false,
+      "details": "",
+      "error": "HTTPConnectionPool(host='localhost', port=8001): Max retries exceeded with url: /api/v1/auth/login (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000156CD7EFF70>: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。'))",
+      "timestamp": "2025-09-01T11:43:55.942394"
+    },
+    {
+      "test_name": "前端可访问性",
+      "success": false,
+      "details": "",
+      "error": "HTTPConnectionPool(host='localhost', port=3001): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000156CD7FD880>: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。'))",
+      "timestamp": "2025-09-01T11:44:00.034005"
+    },
+    {
+      "test_name": "数据库操作",
+      "success": false,
+      "details": "",
+      "error": "(sqlite3.OperationalError) no such table: users\n[SQL: SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.full_name AS users_full_name, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.role AS users_role, users.subscription_tier AS users_subscription_tier, users.credits_balance AS users_credits_balance, users.subscription_expires_at AS users_subscription_expires_at, users.created_at AS users_created_at, users.updated_at AS users_updated_at, users.last_login AS users_last_login \nFROM users\n LIMIT ? OFFSET ?]\n[parameters: (5, 0)]\n(Background on this error at: https://sqlalche.me/e/20/e3q8)",
+      "timestamp": "2025-09-01T11:44:00.758806"
+    },
+    {
+      "test_name": "基础分析服务",
+      "success": true,
+      "details": "分析服务正常工作",
+      "error": "",
+      "timestamp": "2025-09-01T11:44:08.771462"
+    },
+    {
+      "test_name": "综合分析服务",
+      "success": true,
+      "details": "综合分析服务正常工作",
+      "error": "",
+      "timestamp": "2025-09-01T11:44:08.771462"
+    },
+    {
+      "test_name": "认证端点",
+      "success": false,
+      "details": "",
+      "error": "HTTPConnectionPool(host='localhost', port=8001): Max retries exceeded with url: /api/v1/auth/register (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000015690D8C130>: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。'))",
+      "timestamp": "2025-09-01T11:44:12.887373"
+    },
+    {
+      "test_name": "端到端工作流程",
+      "success": false,
+      "details": "用户认证失败",
+      "error": "",
+      "timestamp": "2025-09-01T11:44:12.887373"
+    },
+    {
+      "test_name": "性能测试",
+      "success": false,
+      "details": "",
+      "error": "HTTPConnectionPool(host='localhost', port=8001): Max retries exceeded with url: /api/v1/health (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000015690D8CA00>: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。'))",
+      "timestamp": "2025-09-01T11:44:17.012110"
+    }
+  ],
+  "bugs_found": [
+    {
+      "test_name": "健康检查端点",
+      "error": "HTTPConnectionPool(host='localhost', port=8001): Max retries exceeded with url: /api/v1/health (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000156CD7D1460>: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。'))",
+      "details": "",
+      "timestamp": "2025-09-01T11:43:35.465105"
+    },
+    {
+      "test_name": "认证端点",
+      "error": "HTTPConnectionPool(host='localhost', port=8001): Max retries exceeded with url: /api/v1/auth/register (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000156CD7D1F70>: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。'))",
+      "details": "",
+      "timestamp": "2025-09-01T11:43:39.544694"
+    },
+    {
+      "test_name": "趋势分析端点",
+      "error": "HTTPConnectionPool(host='localhost', port=8001): Max retries exceeded with url: /api/v1/trends/comprehensive-analysis (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000156CD7EFA00>: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。'))",
+      "details": "",
+      "timestamp": "2025-09-01T11:43:43.625109"
+    },
+    {
+      "test_name": "Google Trends端点",
+      "error": "HTTPConnectionPool(host='localhost', port=8001): Max retries exceeded with url: /api/v1/google-trends/search?keywords=AI,%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000156CD7D1430>: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。'))",
+      "details": "",
+      "timestamp": "2025-09-01T11:43:47.746884"
+    },
+    {
+      "test_name": "MonkeyLearn端点",
+      "error": "HTTPConnectionPool(host='localhost', port=8001): Max retries exceeded with url: /api/v1/monkeylearn/comprehensive-analysis (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000156CD7EF910>: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。'))",
+      "details": "",
+      "timestamp": "2025-09-01T11:43:51.833801"
+    },
+    {
+      "test_name": "管理员端点",
+      "error": "HTTPConnectionPool(host='localhost', port=8001): Max retries exceeded with url: /api/v1/auth/login (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000156CD7EFF70>: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。'))",
+      "details": "",
+      "timestamp": "2025-09-01T11:43:55.942394"
+    },
+    {
+      "test_name": "前端可访问性",
+      "error": "HTTPConnectionPool(host='localhost', port=3001): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000156CD7FD880>: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。'))",
+      "details": "",
+      "timestamp": "2025-09-01T11:44:00.034005"
+    },
+    {
+      "test_name": "数据库操作",
+      "error": "(sqlite3.OperationalError) no such table: users\n[SQL: SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.full_name AS users_full_name, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.role AS users_role, users.subscription_tier AS users_subscription_tier, users.credits_balance AS users_credits_balance, users.subscription_expires_at AS users_subscription_expires_at, users.created_at AS users_created_at, users.updated_at AS users_updated_at, users.last_login AS users_last_login \nFROM users\n LIMIT ? OFFSET ?]\n[parameters: (5, 0)]\n(Background on this error at: https://sqlalche.me/e/20/e3q8)",
+      "details": "",
+      "timestamp": "2025-09-01T11:44:00.758806"
+    },
+    {
+      "test_name": "认证端点",
+      "error": "HTTPConnectionPool(host='localhost', port=8001): Max retries exceeded with url: /api/v1/auth/register (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000015690D8C130>: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。'))",
+      "details": "",
+      "timestamp": "2025-09-01T11:44:12.887373"
+    },
+    {
+      "test_name": "端到端工作流程",
+      "error": "",
+      "details": "用户认证失败",
+      "timestamp": "2025-09-01T11:44:12.887373"
+    },
+    {
+      "test_name": "性能测试",
+      "error": "HTTPConnectionPool(host='localhost', port=8001): Max retries exceeded with url: /api/v1/health (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000015690D8CA00>: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。'))",
+      "details": "",
+      "timestamp": "2025-09-01T11:44:17.012110"
+    }
+  ]
+}

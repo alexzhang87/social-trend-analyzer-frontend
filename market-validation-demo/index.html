@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>市场验证解决方案 - 演示</title>
+    <link rel="stylesheet" href="assets/css/demo.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50">
+    <!-- 导航栏 -->
+    <nav class="bg-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <h1 class="text-xl font-bold text-gray-800">市场验证解决方案</h1>
+                    <span class="ml-2 px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">演示版</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="#" class="text-gray-600 hover:text-gray-900" onclick="showPage('dashboard')">统一仪表盘</a>
+                    <a href="#" class="text-gray-600 hover:text-gray-900" onclick="showPage('workflow')">工作流演示</a>
+                    <a href="#" class="text-gray-600 hover:text-gray-900" onclick="showPage('comparison')">对比分析</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主要内容区域 -->
+    <main class="max-w-7xl mx-auto py-6 px-4">
+        <!-- 欢迎页面 -->
+        <div id="welcome-page" class="text-center py-12">
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">从"两个工具"到"一个解决方案"</h2>
+            <p class="text-lg text-gray-600 mb-8">体验关键词分析与PMF分析的完美整合</p>
+            
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <!-- 现状：分离的工具 -->
+                <div class="bg-red-50 p-6 rounded-lg border border-red-200">
+                    <h3 class="text-xl font-semibold text-red-800 mb-4">❌ 现状：分离的工具</h3>
+                    <div class="space-y-3 text-left">
+                        <div class="flex items-center space-x-2">
+                            <div class="w-4 h-4 bg-blue-500 rounded"></div>
+                            <span>关键词分析工具</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <div class="w-4 h-4 bg-green-500 rounded"></div>
+                            <span>PMF分析工具</span>
+                        </div>
+                        <div class="text-sm text-gray-600 mt-4">
+                            • 数据孤岛，无法关联<br>
+                            • 需要手动切换工具<br>
+                            • 缺乏整体洞察<br>
+                            • 决策效率低下
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 未来：统一解决方案 -->
+                <div class="bg-green-50 p-6 rounded-lg border border-green-200">
+                    <h3 class="text-xl font-semibold text-green-800 mb-4">✅ 未来：统一解决方案</h3>
+                    <div class="space-y-3 text-left">
+                        <div class="flex items-center space-x-2">
+                            <div class="w-4 h-4 bg-purple-500 rounded"></div>
+                            <span>市场验证工作流</span>
+                        </div>
+                        <div class="text-sm text-gray-600 mt-4">
+                            • 数据自动关联分析<br>
+                            • 一站式工作流程<br>
+                            • 智能洞察建议<br>
+                            • 高效决策支持
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-center space-x-4">
+                <button onclick="showPage('dashboard')" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors">
+                    体验统一仪表盘
+                </button>
+                <button onclick="showPage('workflow')" class="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors">
+                    查看工作流演示
+                </button>
+            </div>
+        </div>
+
+        <!-- 统一仪表盘页面 -->
+        <div id="dashboard-page" class="hidden">
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold text-gray-900 mb-2">统一市场洞察仪表盘</h2>
+                <p class="text-gray-600">关键词分析与PMF分析的数据融合视图</p>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-6">
+                <!-- 左侧：关键词分析 -->
+                <div class="lg:col-span-1">
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <h3 class="text-lg font-semibold mb-4 flex items-center">
+                            <span class="w-3 h-3 bg-blue-500 rounded-full mr-2"></span>
+                            市场发现
+                        </h3>
+                        
+                        <!-- 热门关键词 -->
+                        <div class="mb-6">
+                            <h4 class="font-medium text-gray-700 mb-3">热门关键词趋势</h4>
+                            <div class="space-y-2">
+                                <div class="flex justify-between items-center p-2 bg-blue-50 rounded">
+                                    <span class="text-sm">AI写作工具</span>
+                                    <span class="text-xs bg-red-100 text-red-800 px-2 py-1 rounded">↑ 156%</span>
+                                </div>
+                                <div class="flex justify-between items-center p-2 bg-blue-50 rounded">
+                                    <span class="text-sm">自动化内容</span>
+                                    <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">↑ 89%</span>
+                                </div>
+                                <div class="flex justify-between items-center p-2 bg-blue-50 rounded">
+                                    <span class="text-sm">智能编辑</span>
+                                    <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">↑ 67%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 市场机会 -->
+                        <div>
+                            <h4 class="font-medium text-gray-700 mb-3">发现的市场机会</h4>
+                            <div class="bg-yellow-50 p-3 rounded border border-yellow-200">
+                                <div class="text-sm font-medium text-yellow-800">🎯 高潜力机会</div>
+                                <div class="text-xs text-yellow-700 mt-1">
+                                    "AI写作工具"搜索量激增，但现有产品用户满意度偏低
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 中间：关联分析 -->
+                <div class="lg:col-span-1">
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <h3 class="text-lg font-semibold mb-4 flex items-center">
+                            <span class="w-3 h-3 bg-purple-500 rounded-full mr-2"></span>
+                            关联洞察
+                        </h3>
+                        
+                        <!-- 关联图表 -->
+                        <div class="mb-6">
+                            <canvas id="correlationChart" width="300" height="200"></canvas>
+                        </div>
+
+                        <!-- 智能建议 -->
+                        <div class="bg-purple-50 p-4 rounded border border-purple-200">
+                            <h4 class="font-medium text-purple-800 mb-2">💡 智能建议</h4>
+                            <div class="text-sm text-purple-700 space-y-2">
+                                <div>• 关注"AI写作工具"关键词，市场需求与产品表现存在缺口</div>
+                                <div>• 优化产品"内容生成速度"功能，可提升PMF分数</div>
+                                <div>• 建议针对"智能编辑"功能进行用户调研</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 右侧：PMF分析 -->
+                <div class="lg:col-span-1">
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <h3 class="text-lg font-semibold mb-4 flex items-center">
+                            <span class="w-3 h-3 bg-green-500 rounded-full mr-2"></span>
+                            产品验证
+                        </h3>
+                        
+                        <!-- PMF分数 -->
+                        <div class="mb-6">
+                            <h4 class="font-medium text-gray-700 mb-3">PMF分数</h4>
+                            <div class="relative">
+                                <div class="w-full bg-gray-200 rounded-full h-4">
+                                    <div class="bg-orange-500 h-4 rounded-full" style="width: 65%"></div>
+                                </div>
+                                <div class="text-center mt-2">
+                                    <span class="text-2xl font-bold text-orange-600">65</span>
+                                    <span class="text-sm text-gray-500">/100</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 关键指标 -->
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-gray-600">用户满意度</span>
+                                <span class="text-sm font-medium">72%</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-gray-600">留存率(7天)</span>
+                                <span class="text-sm font-medium">58%</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-gray-600">推荐意愿</span>
+                                <span class="text-sm font-medium">45%</span>
+                            </div>
+                        </div>
+
+                        <!-- 改进建议 -->
+                        <div class="mt-6 bg-green-50 p-3 rounded border border-green-200">
+                            <div class="text-sm font-medium text-green-800">🚀 优化方向</div>
+                            <div class="text-xs text-green-700 mt-1">
+                                基于关键词分析，重点优化"内容生成速度"和"智能编辑"功能
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 工作流演示页面 -->
+        <div id="workflow-page" class="hidden">
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold text-gray-900 mb-2">引导式市场验证工作流</h2>
+                <p class="text-gray-600">从市场发现到产品验证的完整流程</p>
+            </div>
+
+            <!-- 工作流步骤 -->
+            <div class="flex justify-center mb-8">
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center">
+                        <div class="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-medium">1</div>
+                        <span class="ml-2 text-sm font-medium">市场发现</span>
+                    </div>
+                    <div class="w-8 h-0.5 bg-gray-300"></div>
+                    <div class="flex items-center">
+                        <div class="w-8 h-8 bg-gray-300 text-gray-600 rounded-full flex items-center justify-center text-sm font-medium">2</div>
+                        <span class="ml-2 text-sm text-gray-600">产品验证</span>
+                    </div>
+                    <div class="w-8 h-0.5 bg-gray-300"></div>
+                    <div class="flex items-center">
+                        <div class="w-8 h-8 bg-gray-300 text-gray-600 rounded-full flex items-center justify-center text-sm font-medium">3</div>
+                        <span class="ml-2 text-sm text-gray-600">优化迭代</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 步骤1：市场发现 -->
+            <div id="step1" class="bg-white rounded-lg shadow p-6 mb-6">
+                <h3 class="text-lg font-semibold mb-4">步骤1：市场发现</h3>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="font-medium mb-3">关键词分析结果</h4>
+                        <div class="bg-blue-50 p-4 rounded">
+                            <div class="text-sm space-y-2">
+                                <div>🔍 发现高潜力关键词："AI写作工具"</div>
+                                <div>📈 搜索趋势：过去3个月增长156%</div>
+                                <div>🎯 竞争程度：中等（机会窗口）</div>
+                                <div>👥 目标用户：内容创作者、营销人员</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="font-medium mb-3">市场机会评估</h4>
+                        <div class="bg-yellow-50 p-4 rounded">
+                            <div class="text-sm space-y-2">
+                                <div>💰 市场规模：大（搜索量>10万/月）</div>
+                                <div>⚡ 增长速度：快（月增长>50%）</div>
+                                <div>🏆 竞争强度：中等</div>
+                                <div>✅ 建议：值得深入验证</div>
+                            </div>
+                        </div>
+                        <button onclick="nextStep(2)" class="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors">
+                            进入产品验证 →
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 步骤2：产品验证（初始隐藏） -->
+            <div id="step2" class="bg-white rounded-lg shadow p-6 mb-6 hidden">
+                <h3 class="text-lg font-semibold mb-4">步骤2：产品验证</h3>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="font-medium mb-3">基于关键词的PMF测试</h4>
+                        <div class="bg-green-50 p-4 rounded">
+                            <div class="text-sm space-y-2">
+                                <div>🎯 测试焦点："AI写作工具"相关功能</div>
+                                <div>📊 用户调研：针对内容创作者群体</div>
+                                <div>🔍 关键问题：</div>
+                                <div class="ml-4">
+                                    • 对AI写作工具的核心需求？<br>
+                                    • 现有产品的主要痛点？<br>
+                                    • 愿意为此付费的价格区间？
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="font-medium mb-3">PMF验证结果</h4>
+                        <div class="bg-orange-50 p-4 rounded">
+                            <div class="text-sm space-y-2">
+                                <div>📈 PMF分数：65/100（中等）</div>
+                                <div>💡 关键发现：</div>
+                                <div class="ml-4">
+                                    • 用户对"内容生成速度"不满意<br>
+                                    • "智能编辑"功能需求强烈<br>
+                                    • 价格敏感度较高
+                                </div>
+                                <div>🎯 优化方向已识别</div>
+                            </div>
+                        </div>
+                        <button onclick="nextStep(3)" class="mt-4 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition-colors">
+                            制定优化策略 →
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 步骤3：优化迭代（初始隐藏） -->
+            <div id="step3" class="bg-white rounded-lg shadow p-6 mb-6 hidden">
+                <h3 class="text-lg font-semibold mb-4">步骤3：优化迭代</h3>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="font-medium mb-3">数据驱动的优化计划</h4>
+                        <div class="bg-purple-50 p-4 rounded">
+                            <div class="text-sm space-y-2">
+                                <div>🚀 优先级1：提升内容生成速度</div>
+                                <div class="ml-4 text-gray-600">• 关键词数据显示用户痛点<br>• PMF调研证实需求强烈</div>
+                                <div>🎨 优先级2：增强智能编辑功能</div>
+                                <div class="ml-4 text-gray-600">• 新兴关键词趋势<br>• 用户访谈验证需求</div>
+                                <div>💰 优先级3：优化定价策略</div>
+                                <div class="ml-4 text-gray-600">• 基于用户价格敏感度调研</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="font-medium mb-3">预期效果</h4>
+                        <div class="bg-green-50 p-4 rounded">
+                            <div class="text-sm space-y-2">
+                                <div>📊 预期PMF分数提升：65 → 85</div>
+                                <div>📈 预期关键指标改善：</div>
+                                <div class="ml-4">
+                                    • 用户满意度：72% → 88%<br>
+                                    • 7天留存率：58% → 75%<br>
+                                    • 推荐意愿：45% → 70%
+                                </div>
+                                <div>🎯 持续监控关键词趋势变化</div>
+                            </div>
+                        </div>
+                        <button onclick="showPage('comparison')" class="mt-4 bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 transition-colors">
+                            查看对比分析 →
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 对比分析页面 -->
+        <div id="comparison-page" class="hidden">
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold text-gray-900 mb-2">方案对比分析</h2>
+                <p class="text-gray-600">传统分离式工具 vs 统一市场验证解决方案</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- 传统方案 -->
+                <div class="bg-red-50 rounded-lg p-6 border border-red-200">
+                    <h3 class="text-xl font-semibold text-red-800 mb-4">❌ 传统分离式工具</h3>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-medium text-red-700 mb-2">工作流程</h4>
+                            <div class="text-sm text-red-600 space-y-1">
+                                <div>1. 在关键词工具中分析市场趋势</div>
+                                <div>2. 手动记录和整理数据</div>
+                                <div>3. 切换到PMF分析工具</div>
+                                <div>4. 重新输入相关信息</div>
+                                <div>5. 人工对比和分析两套数据</div>
+                                <div>6. 手动制定优化策略</div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-medium text-red-700 mb-2">主要问题</h4>
+                            <div class="text-sm text-red-600 space-y-1">
+                                <div>• 数据孤岛，无法自动关联</div>
+                                <div>• 工具切换频繁，效率低下</div>
+                                <div>• 人工分析易出错，遗漏洞察</div>
+                                <div>• 决策依据不够全面</div>
+                                <div>• 学习成本高，需要掌握多个工具</div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-medium text-red-700 mb-2">时间成本</h4>
+                            <div class="text-sm text-red-600">
+                                <div class="font-medium">平均每次分析：4-6小时</div>
+                                <div>• 关键词分析：2小时</div>
+                                <div>• PMF分析：2小时</div>
+                                <div>• 数据整合：1-2小时</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 统一方案 -->
+                <div class="bg-green-50 rounded-lg p-6 border border-green-200">
+                    <h3 class="text-xl font-semibold text-green-800 mb-4">✅ 统一市场验证解决方案</h3>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-medium text-green-700 mb-2">工作流程</h4>
+                            <div class="text-sm text-green-600 space-y-1">
+                                <div>1. 一键启动市场验证工作流</div>
+                                <div>2. 系统自动分析关键词趋势</div>
+                                <div>3. 智能推荐PMF验证方向</div>
+                                <div>4. 数据自动关联和分析</div>
+                                <div>5. AI生成优化建议</div>
+                                <div>6. 一站式决策支持</div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-medium text-green-700 mb-2">核心优势</h4>
+                            <div class="text-sm text-green-600 space-y-1">
+                                <div>• 数据自动关联，洞察更深入</div>
+                                <div>• 一站式操作，效率大幅提升</div>
+                                <div>• AI智能分析，减少人为错误</div>
+                                <div>• 全面数据支持，决策更准确</div>
+                                <div>• 学习成本低，操作简单直观</div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-medium text-green-700 mb-2">时间成本</h4>
+                            <div class="text-sm text-green-600">
+                                <div class="font-medium">平均每次分析：1-1.5小时</div>
+                                <div>• 自动化分析：30分钟</div>
+                                <div>• 结果审查：30分钟</div>
+                                <div>• 策略制定：30分钟</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 效果对比 -->
+            <div class="mt-8 bg-white rounded-lg shadow p-6">
+                <h3 class="text-lg font-semibold mb-4">效果对比</h3>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-blue-600 mb-2">70%</div>
+                        <div class="text-sm text-gray-600">时间节省</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-green-600 mb-2">85%</div>
+                        <div class="text-sm text-gray-600">决策准确性提升</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-purple-600 mb-2">60%</div>
+                        <div class="text-sm text-gray-600">学习成本降低</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="assets/js/demo.js"></script>
+    <script>
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            // 默认显示欢迎页面
+            showPage('welcome');
+            
+            // 为导航链接添加点击事件
+            document.querySelectorAll('nav a[onclick]').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                });
+            });
+        });
+    </script>
+</body>
+</html>

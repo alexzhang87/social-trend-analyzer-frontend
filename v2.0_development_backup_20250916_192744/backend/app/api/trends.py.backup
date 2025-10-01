@@ -1,0 +1,139 @@
+from fastapi import APIRouter, HTTPException, BackgroundTasks
+from typing import List
+import logging
+import uuid
+import json
+
+from ..data.models.schemas import AnalysisRequest
+from ..services.working_social_media_service import WorkingSocialMediaService
+from ..services.analysis_service import AnalysisService
+
+logger = logging.getLogger("trend-analyzer")
+router = APIRouter()
+
+def direct_analysis_task(keywords: List[str], task_id: str):
+    """
+    在后台执行的直接分析任务，用于Celery不可用的情况。
+    """
+    logger.info(f"后台任务开始: {task_id} for keywords: {keywords}")
+    try:
+        import redis
+
+        # 在任务内部创建服务实例
+        analysis_service = AnalysisService()
+        redis_client = redis.Redis(host='localhost', port=6379, db=0, decode_responses=True)
+        
+        logger.info(f"[{task_id}] 正在进行分析...")
+        # 🔧 修复：直接使用analyze方法，不需要获取social_data
+        result = analysis_service.analyze(keywords)
+        
+        # 缓存分析结果
+        cache_key = f"analysis:{json.dumps(sorted(keywords))}"
+        redis_client.set(cache_key, json.dumps(result), ex=86400)
+        
+        # 存储最终任务结果
+        redis_client.set(f"task_result:{task_id}", json.dumps({
+            "status": "SUCCESS",
+            "result": result
+        }), ex=3600)
+        
+        logger.info(f"✅ 后台任务成功完成: {task_id}")
+        
+    except Exception as e:
+        logger.error(f"❌ 后台任务失败: {task_id}, 错误: {e}", exc_info=True)
+        # 存储失败状态
+        try:
+            redis_client = redis.Redis(host='localhost', port=6379, db=0, decode_responses=True)
+            redis_client.set(f"task_result:{task_id}", json.dumps({
+                "status": "FAILURE",
+                "error": str(e)
+            }), ex=3600)
+        except Exception as redis_err:
+            logger.error(f"无法将失败状态写入Redis: {redis_err}")
+
+@router.post("/", status_code=202)
+async def analyze_keywords(request: AnalysisRequest, background_tasks: BackgroundTasks):
+    """
+    分析关键词趋势 - 优先使用Celery，失败时回退到后台任务
+    """
+    keywords = request.keywords
+    if not keywords:
+        raise HTTPException(status_code=400, detail="Keywords list cannot be empty.")
+
+    logger.info(f"收到分析请求: {keywords}")
+    task_id = str(uuid.uuid4())
+    
+    # 🔧 优先尝试使用Celery
+    try:
+        from ..tasks import analyze_trends_task
+        logger.info("尝试使用Celery任务")
+        
+        # 发送任务到Celery
+        celery_result = analyze_trends_task.delay(keywords)
+        
+        logger.info(f"Celery任务已派发，任务ID: {celery_result.id}")
+        return {
+            "task_id": celery_result.id,
+            "status": "PENDING",
+            "message": "分析任务已通过Celery启动"
+        }
+        
+    except Exception as celery_error:
+        logger.warning(f"Celery不可用: {celery_error}，回退到后台任务模式")
+        
+        # 回退到后台任务
+        background_tasks.add_task(direct_analysis_task, keywords, task_id)
+        
+        logger.info(f"后台任务已派发，任务ID: {task_id}")
+        return {
+            "task_id": task_id,
+            "status": "PENDING",
+            "message": "分析任务已在后台启动"
+        }
+
+@router.post("/")
+async def analyze_trends(request: TrendRequest):
+    """
+    分析社交媒体趋势 - 完全同步版本
+    """
+    try:
+        # 尝试使用Celery异步处理
+        task = analyze_trends_task.delay(request.keywords)
+        
+        return {
+            "task_id": task.id,
+            "status": "PENDING",
+            "message": "分析任务已提交，请使用task_id查询进度"
+        }
+        
+    except Exception as e:
+        logger.error(f"Celery任务提交失败: {e}，切换到直接执行模式")
+        
+        # 如果Celery不可用，直接执行分析
+        try:
+            analysis_service = AnalysisService()
+            result = analysis_service.analyze(request.keywords)
+            
+            # 生成一个模拟的task_id用于缓存
+            import uuid
+            task_id = str(uuid.uuid4())
+            
+            # 将结果存储到Redis中
+            import redis
+            import json
+            redis_client = redis.Redis(host='localhost', port=6379, db=0, decode_responses=True)
+            redis_client.set(f"task_result:{task_id}", json.dumps({
+                "status": "SUCCESS",
+                "result": result
+            }), ex=3600)
+            
+            return {
+                "task_id": task_id,
+                "status": "SUCCESS",
+                "message": "分析完成（直接执行模式）",
+                "result": result
+            }
+            
+        except Exception as direct_error:
+            logger.error(f"直接执行也失败: {direct_error}")
+            raise HTTPException(status_code=500, detail=f"分析失败: {str(direct_error)}")

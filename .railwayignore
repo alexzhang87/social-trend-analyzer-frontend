@@ -1,0 +1,93 @@
+# Railway ignore file - exclude large files and unnecessary directories
+
+# Git directories
+.git/
+.git_disabled/
+
+# Python cache and virtual environments
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+
+# Node modules
+node_modules/
+
+# Build outputs and distributions
+dist/
+build/
+*.egg-info/
+
+# Large data files and training data
+backend/data/training/
+*.csv
+*.json
+*.pkl
+*.model
+*.bin
+
+# Compressed archives
+压缩/
+scrapy-tags-2.13.3/
+
+# Version backups
+version_backup/
+v3-frontend-backup/
+archive/
+
+# Test results and logs
+test_results/
+*.log
+logs/
+
+# Large binary files
+*.dll
+*.so
+*.dylib
+*.lib
+*.pack
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# IDE and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Documentation and markdown files (keep only essential ones)
+*.md
+!README.md
+!QUICK_DEPLOY.md
+
+# Temporary and backup files
+*.tmp
+*.temp
+*.bak
+*.backup
+
+# Market validation demo
+market-validation-demo/
+
+# Social trend analyzer backup
+social-trend-analyzer/
+
+# Batch and script files (keep only essential ones)
+*.bat
+*.ps1
+!deploy-railway.ps1
+
+# Docker compose files (not needed for Railway)
+docker-compose*.yml
+
+# Exclude root Dockerfile, use backend/Dockerfile instead
+/Dockerfile
+
+# Configuration files (keep only essential ones)
+.env.*
+!.env.railway

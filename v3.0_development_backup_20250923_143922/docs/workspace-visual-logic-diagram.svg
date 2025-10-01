@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1200" height="800" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .title { font-family: Arial, sans-serif; font-size: 18px; font-weight: bold; fill: #2c3e50; }
+      .module { font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; fill: #34495e; }
+      .submodule { font-family: Arial, sans-serif; font-size: 12px; fill: #7f8c8d; }
+      .component { font-family: Arial, sans-serif; font-size: 10px; fill: #95a5a6; }
+      .flow-text { font-family: Arial, sans-serif; font-size: 11px; fill: #e74c3c; }
+      .value-text { font-family: Arial, sans-serif; font-size: 10px; fill: #27ae60; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#3498db" />
+    </marker>
+  </defs>
+  
+  <!-- 背景 -->
+  <rect width="1200" height="800" fill="#f8f9fa" stroke="#dee2e6" stroke-width="2"/>
+  
+  <!-- 标题 -->
+  <text x="600" y="30" text-anchor="middle" class="title">IdeaEden Workspace 功能架构与数据流图</text>
+  
+  <!-- 统一工作台核心 -->
+  <rect x="450" y="60" width="300" height="80" fill="#3498db" stroke="#2980b9" stroke-width="2" rx="10"/>
+  <text x="600" y="85" text-anchor="middle" class="module" fill="white">Unified Workspace</text>
+  <text x="600" y="105" text-anchor="middle" class="submodule" fill="white">统一工作台入口</text>
+  <text x="600" y="125" text-anchor="middle" class="component" fill="white">unified-workspace.tsx</text>
+  
+  <!-- AI-Powered Insights -->
+  <rect x="50" y="180" width="200" height="120" fill="#e74c3c" stroke="#c0392b" stroke-width="2" rx="8"/>
+  <text x="150" y="205" text-anchor="middle" class="module" fill="white">AI-Powered Insights</text>
+  <text x="150" y="225" text-anchor="middle" class="submodule" fill="white">智能洞察</text>
+  <text x="150" y="245" text-anchor="middle" class="component" fill="white">• Trending Opportunity</text>
+  <text x="150" y="260" text-anchor="middle" class="component" fill="white">• Growth Prediction</text>
+  <text x="150" y="275" text-anchor="middle" class="component" fill="white">• Product Focus</text>
+  <text x="150" y="290" text-anchor="middle" class="component" fill="white">• Competitive Risk</text>
+  
+  <!-- Keyword Analysis -->
+  <rect x="280" y="180" width="180" height="120" fill="#f39c12" stroke="#e67e22" stroke-width="2" rx="8"/>
+  <text x="370" y="205" text-anchor="middle" class="module" fill="white">Keyword Analysis</text>
+  <text x="370" y="225" text-anchor="middle" class="submodule" fill="white">关键词分析</text>
+  <text x="370" y="245" text-anchor="middle" class="component" fill="white">• analysis-page.tsx</text>
+  <text x="370" y="260" text-anchor="middle" class="component" fill="white">• analysis-results.tsx</text>
+  <text x="370" y="275" text-anchor="middle" class="component" fill="white">• professional-analysis.tsx</text>
+  
+  <!-- PMF Evaluation -->
+  <rect x="490" y="180" width="180" height="120" fill="#9b59b6" stroke="#8e44ad" stroke-width="2" rx="8"/>
+  <text x="580" y="205" text-anchor="middle" class="module" fill="white">PMF Evaluation</text>
+  <text x="580" y="225" text-anchor="middle" class="submodule" fill="white">产品市场匹配</text>
+  <text x="580" y="245" text-anchor="middle" class="component" fill="white">• automated-pmf-evaluation</text>
+  <text x="580" y="260" text-anchor="middle" class="component" fill="white">• pmf-validation</text>
+  <text x="580" y="275" text-anchor="middle" class="component" fill="white">• pmf-scorecard</text>
+  
+  <!-- Competitor Monitoring -->
+  <rect x="700" y="180" width="180" height="120" fill="#e67e22" stroke="#d35400" stroke-width="2" rx="8"/>
+  <text x="790" y="205" text-anchor="middle" class="module" fill="white">Competitor Monitor</text>
+  <text x="790" y="225" text-anchor="middle" class="submodule" fill="white">竞品监控</text>
+  <text x="790" y="245" text-anchor="middle" class="component" fill="white">• competitor-comparison</text>
+  <text x="790" y="260" text-anchor="middle" class="component" fill="white">• competitor-alert</text>
+  
+  <!-- Trend Analytics -->
+  <rect x="910" y="180" width="180" height="120" fill="#1abc9c" stroke="#16a085" stroke-width="2" rx="8"/>
+  <text x="1000" y="205" text-anchor="middle" class="module" fill="white">Trend Analytics</text>
+  <text x="1000" y="225" text-anchor="middle" class="submodule" fill="white">趋势分析</text>
+  <text x="1000" y="245" text-anchor="middle" class="component" fill="white">• trend-analyzer</text>
+  <text x="1000" y="260" text-anchor="middle" class="component" fill="white">• trend-chart-panel</text>
+  <text x="1000" y="275" text-anchor="middle" class="component" fill="white">• trend-list & modal</text>
+  
+  <!-- Data Studio -->
+  <rect x="350" y="350" width="200" height="100" fill="#34495e" stroke="#2c3e50" stroke-width="2" rx="8"/>
+  <text x="450" y="375" text-anchor="middle" class="module" fill="white">Data Studio</text>
+  <text x="450" y="395" text-anchor="middle" class="submodule" fill="white">数据工作室</text>
+  <text x="450" y="415" text-anchor="middle" class="component" fill="white">• report-generator</text>
+  <text x="450" y="430" text-anchor="middle" class="component" fill="white">• data-studio-integration</text>
+  
+  <!-- User Center -->
+  <rect x="600" y="350" width="200" height="100" fill="#95a5a6" stroke="#7f8c8d" stroke-width="2" rx="8"/>
+  <text x="700" y="375" text-anchor="middle" class="module" fill="white">User Center</text>
+  <text x="700" y="395" text-anchor="middle" class="submodule" fill="white">用户中心</text>
+  <text x="700" y="415" text-anchor="middle" class="component" fill="white">• user-dashboard</text>
+  <text x="700" y="430" text-anchor="middle" class="component" fill="white">• user-center</text>
+  
+  <!-- 数据流箭头 -->
+  <!-- 从 Workspace 到各模块 -->
+  <line x1="550" y1="140" x2="150" y2="180" stroke="#3498db" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="580" y1="140" x2="370" y2="180" stroke="#3498db" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="600" y1="140" x2="580" y2="180" stroke="#3498db" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="620" y1="140" x2="790" y2="180" stroke="#3498db" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="650" y1="140" x2="1000" y2="180" stroke="#3498db" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- 模块间关联 -->
+  <line x1="250" y1="240" x2="280" y2="240" stroke="#e74c3c" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="460" y1="240" x2="490" y2="240" stroke="#f39c12" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="670" y1="240" x2="700" y2="240" stroke="#9b59b6" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- 到 Data Studio 的汇聚 -->
+  <line x1="370" y1="300" x2="420" y2="350" stroke="#27ae60" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="580" y1="300" x2="470" y2="350" stroke="#27ae60" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="790" y1="300" x2="480" y2="350" stroke="#27ae60" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="1000" y1="300" x2="520" y2="350" stroke="#27ae60" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- 用户价值标注 -->
+  <text x="150" y="320" text-anchor="middle" class="value-text">快速决策支持</text>
+  <text x="370" y="320" text-anchor="middle" class="value-text">投放策略评估</text>
+  <text x="580" y="320" text-anchor="middle" class="value-text">产品方向验证</text>
+  <text x="790" y="320" text-anchor="middle" class="value-text">竞争策略制定</text>
+  <text x="1000" y="320" text-anchor="middle" class="value-text">趋势机会识别</text>
+  
+  <!-- 数据流说明 -->
+  <text x="50" y="500" class="flow-text">数据流向说明：</text>
+  <text x="50" y="520" class="component">1. 用户通过 Unified Workspace 进入各功能模块</text>
+  <text x="50" y="535" class="component">2. AI Insights → Keyword Analysis → Professional Analysis（深度分析）</text>
+  <text x="50" y="550" class="component">3. Keyword Analysis → PMF Evaluation（产品验证）</text>
+  <text x="50" y="565" class="component">4. PMF → Competitor Monitoring（竞品对比）</text>
+  <text x="50" y="580" class="component">5. 所有模块结果 → Data Studio（报告生成与导出）</text>
+  <text x="50" y="595" class="component">6. User Center 提供统一的用户资产与导航入口</text>
+  
+  <!-- 功能优先级标注 -->
+  <text x="650" y="500" class="flow-text">功能优先级：</text>
+  <rect x="650" y="510" width="15" height="15" fill="#e74c3c"/>
+  <text x="675" y="522" class="component">必要功能：Workspace + Keyword Analysis + AI Insights</text>
+  <rect x="650" y="530" width="15" height="15" fill="#f39c12"/>
+  <text x="675" y="542" class="component">重要功能：PMF Evaluation + Data Studio</text>
+  <rect x="650" y="550" width="15" height="15" fill="#95a5a6"/>
+  <text x="675" y="562" class="component">可暂缓功能：高级趋势可视化 + 管理端功能</text>
+  
+  <!-- 技术架构说明 -->
+  <text x="50" y="650" class="flow-text">技术实现：</text>
+  <text x="50" y="670" class="component">• 前端：React + TypeScript + Tailwind CSS</text>
+  <text x="50" y="685" class="component">• 状态管理：useState + Context（currentView, activeSection, currentKeyword）</text>
+  <text x="50" y="700" class="component">• 后端：FastAPI + Uvicorn（分析引擎与数据处理）</text>
+  <text x="50" y="715" class="component">• 数据流：用户交互 → 状态更新 → 视图切换 → API 请求 → 结果渲染</text>
+  
+  <!-- 近似功能对比 -->
+  <text x="650" y="650" class="flow-text">近似功能区分：</text>
+  <text x="650" y="670" class="component">• AI Insights vs Trend Analytics：策略建议 vs 数据可视化</text>
+  <text x="650" y="685" class="component">• Keyword Analysis vs Professional Analysis：基础分析 vs 深度解读</text>
+  <text x="650" y="700" class="component">• Competitor Comparison vs Alert：静态对比 vs 动态预警</text>
+  <text x="650" y="715" class="component">• PMF Evaluation vs Validation：自动评分 vs 手动验证</text>
+</svg>

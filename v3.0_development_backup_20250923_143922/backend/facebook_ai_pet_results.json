@@ -1,0 +1,383 @@
+{
+  "page_results": {},
+  "search_results": {
+    "AI pet": [
+      {
+        "id": "fb_demo_0",
+        "content": "这是一个关于'AI pet'的Facebook模拟帖子。实际使用中，您需要使用Facebook的官方API或其他数据源。",
+        "url": "https://facebook.com/demo/post/0",
+        "date": "2025-08-25T19:27:17.686393",
+        "user": {
+          "name": "Demo User 0",
+          "url": "https://facebook.com/demouser0",
+          "verified": true
+        },
+        "metrics": {
+          "like_count": 21,
+          "comment_count": 22,
+          "share_count": 9,
+          "reaction_count": 42
+        },
+        "post_type": "demo_post",
+        "source": "facebook_demo",
+        "platform": "snscrape"
+      },
+      {
+        "id": "fb_demo_1",
+        "content": "这是一个关于'AI pet'的Facebook模拟帖子。实际使用中，您需要使用Facebook的官方API或其他数据源。",
+        "url": "https://facebook.com/demo/post/1",
+        "date": "2025-08-25T18:27:17.686393",
+        "user": {
+          "name": "Demo User 1",
+          "url": "https://facebook.com/demouser1",
+          "verified": false
+        },
+        "metrics": {
+          "like_count": 45,
+          "comment_count": 37,
+          "share_count": 3,
+          "reaction_count": 60
+        },
+        "post_type": "demo_post",
+        "source": "facebook_demo",
+        "platform": "snscrape"
+      },
+      {
+        "id": "fb_demo_2",
+        "content": "这是一个关于'AI pet'的Facebook模拟帖子。实际使用中，您需要使用Facebook的官方API或其他数据源。",
+        "url": "https://facebook.com/demo/post/2",
+        "date": "2025-08-25T17:27:17.686393",
+        "user": {
+          "name": "Demo User 2",
+          "url": "https://facebook.com/demouser2",
+          "verified": true
+        },
+        "metrics": {
+          "like_count": 91,
+          "comment_count": 19,
+          "share_count": 17,
+          "reaction_count": 61
+        },
+        "post_type": "demo_post",
+        "source": "facebook_demo",
+        "platform": "snscrape"
+      }
+    ],
+    "artificial intelligence pet": [
+      {
+        "id": "fb_demo_0",
+        "content": "这是一个关于'artificial intelligence pet'的Facebook模拟帖子。实际使用中，您需要使用Facebook的官方API或其他数据源。",
+        "url": "https://facebook.com/demo/post/0",
+        "date": "2025-08-25T19:27:18.693719",
+        "user": {
+          "name": "Demo User 0",
+          "url": "https://facebook.com/demouser0",
+          "verified": true
+        },
+        "metrics": {
+          "like_count": 99,
+          "comment_count": 22,
+          "share_count": 10,
+          "reaction_count": 87
+        },
+        "post_type": "demo_post",
+        "source": "facebook_demo",
+        "platform": "snscrape"
+      },
+      {
+        "id": "fb_demo_1",
+        "content": "这是一个关于'artificial intelligence pet'的Facebook模拟帖子。实际使用中，您需要使用Facebook的官方API或其他数据源。",
+        "url": "https://facebook.com/demo/post/1",
+        "date": "2025-08-25T18:27:18.693719",
+        "user": {
+          "name": "Demo User 1",
+          "url": "https://facebook.com/demouser1",
+          "verified": false
+        },
+        "metrics": {
+          "like_count": 77,
+          "comment_count": 46,
+          "share_count": 14,
+          "reaction_count": 35
+        },
+        "post_type": "demo_post",
+        "source": "facebook_demo",
+        "platform": "snscrape"
+      },
+      {
+        "id": "fb_demo_2",
+        "content": "这是一个关于'artificial intelligence pet'的Facebook模拟帖子。实际使用中，您需要使用Facebook的官方API或其他数据源。",
+        "url": "https://facebook.com/demo/post/2",
+        "date": "2025-08-25T17:27:18.693719",
+        "user": {
+          "name": "Demo User 2",
+          "url": "https://facebook.com/demouser2",
+          "verified": true
+        },
+        "metrics": {
+          "like_count": 86,
+          "comment_count": 40,
+          "share_count": 15,
+          "reaction_count": 97
+        },
+        "post_type": "demo_post",
+        "source": "facebook_demo",
+        "platform": "snscrape"
+      }
+    ],
+    "robot dog": [
+      {
+        "id": "fb_demo_0",
+        "content": "这是一个关于'robot dog'的Facebook模拟帖子。实际使用中，您需要使用Facebook的官方API或其他数据源。",
+        "url": "https://facebook.com/demo/post/0",
+        "date": "2025-08-25T19:27:19.705558",
+        "user": {
+          "name": "Demo User 0",
+          "url": "https://facebook.com/demouser0",
+          "verified": true
+        },
+        "metrics": {
+          "like_count": 83,
+          "comment_count": 27,
+          "share_count": 4,
+          "reaction_count": 72
+        },
+        "post_type": "demo_post",
+        "source": "facebook_demo",
+        "platform": "snscrape"
+      },
+      {
+        "id": "fb_demo_1",
+        "content": "这是一个关于'robot dog'的Facebook模拟帖子。实际使用中，您需要使用Facebook的官方API或其他数据源。",
+        "url": "https://facebook.com/demo/post/1",
+        "date": "2025-08-25T18:27:19.706544",
+        "user": {
+          "name": "Demo User 1",
+          "url": "https://facebook.com/demouser1",
+          "verified": false
+        },
+        "metrics": {
+          "like_count": 36,
+          "comment_count": 50,
+          "share_count": 16,
+          "reaction_count": 18
+        },
+        "post_type": "demo_post",
+        "source": "facebook_demo",
+        "platform": "snscrape"
+      },
+      {
+        "id": "fb_demo_2",
+        "content": "这是一个关于'robot dog'的Facebook模拟帖子。实际使用中，您需要使用Facebook的官方API或其他数据源。",
+        "url": "https://facebook.com/demo/post/2",
+        "date": "2025-08-25T17:27:19.706544",
+        "user": {
+          "name": "Demo User 2",
+          "url": "https://facebook.com/demouser2",
+          "verified": true
+        },
+        "metrics": {
+          "like_count": 95,
+          "comment_count": 49,
+          "share_count": 20,
+          "reaction_count": 116
+        },
+        "post_type": "demo_post",
+        "source": "facebook_demo",
+        "platform": "snscrape"
+      }
+    ],
+    "smart pet": [
+      {
+        "id": "fb_demo_0",
+        "content": "这是一个关于'smart pet'的Facebook模拟帖子。实际使用中，您需要使用Facebook的官方API或其他数据源。",
+        "url": "https://facebook.com/demo/post/0",
+        "date": "2025-08-25T19:27:20.714048",
+        "user": {
+          "name": "Demo User 0",
+          "url": "https://facebook.com/demouser0",
+          "verified": true
+        },
+        "metrics": {
+          "like_count": 12,
+          "comment_count": 7,
+          "share_count": 5,
+          "reaction_count": 102
+        },
+        "post_type": "demo_post",
+        "source": "facebook_demo",
+        "platform": "snscrape"
+      },
+      {
+        "id": "fb_demo_1",
+        "content": "这是一个关于'smart pet'的Facebook模拟帖子。实际使用中，您需要使用Facebook的官方API或其他数据源。",
+        "url": "https://facebook.com/demo/post/1",
+        "date": "2025-08-25T18:27:20.714048",
+        "user": {
+          "name": "Demo User 1",
+          "url": "https://facebook.com/demouser1",
+          "verified": false
+        },
+        "metrics": {
+          "like_count": 63,
+          "comment_count": 18,
+          "share_count": 13,
+          "reaction_count": 97
+        },
+        "post_type": "demo_post",
+        "source": "facebook_demo",
+        "platform": "snscrape"
+      },
+      {
+        "id": "fb_demo_2",
+        "content": "这是一个关于'smart pet'的Facebook模拟帖子。实际使用中，您需要使用Facebook的官方API或其他数据源。",
+        "url": "https://facebook.com/demo/post/2",
+        "date": "2025-08-25T17:27:20.714048",
+        "user": {
+          "name": "Demo User 2",
+          "url": "https://facebook.com/demouser2",
+          "verified": true
+        },
+        "metrics": {
+          "like_count": 56,
+          "comment_count": 47,
+          "share_count": 17,
+          "reaction_count": 69
+        },
+        "post_type": "demo_post",
+        "source": "facebook_demo",
+        "platform": "snscrape"
+      }
+    ],
+    "AI companion": [
+      {
+        "id": "fb_demo_0",
+        "content": "这是一个关于'AI companion'的Facebook模拟帖子。实际使用中，您需要使用Facebook的官方API或其他数据源。",
+        "url": "https://facebook.com/demo/post/0",
+        "date": "2025-08-25T19:27:21.727079",
+        "user": {
+          "name": "Demo User 0",
+          "url": "https://facebook.com/demouser0",
+          "verified": true
+        },
+        "metrics": {
+          "like_count": 66,
+          "comment_count": 7,
+          "share_count": 4,
+          "reaction_count": 63
+        },
+        "post_type": "demo_post",
+        "source": "facebook_demo",
+        "platform": "snscrape"
+      },
+      {
+        "id": "fb_demo_1",
+        "content": "这是一个关于'AI companion'的Facebook模拟帖子。实际使用中，您需要使用Facebook的官方API或其他数据源。",
+        "url": "https://facebook.com/demo/post/1",
+        "date": "2025-08-25T18:27:21.727079",
+        "user": {
+          "name": "Demo User 1",
+          "url": "https://facebook.com/demouser1",
+          "verified": false
+        },
+        "metrics": {
+          "like_count": 27,
+          "comment_count": 13,
+          "share_count": 12,
+          "reaction_count": 51
+        },
+        "post_type": "demo_post",
+        "source": "facebook_demo",
+        "platform": "snscrape"
+      },
+      {
+        "id": "fb_demo_2",
+        "content": "这是一个关于'AI companion'的Facebook模拟帖子。实际使用中，您需要使用Facebook的官方API或其他数据源。",
+        "url": "https://facebook.com/demo/post/2",
+        "date": "2025-08-25T17:27:21.727079",
+        "user": {
+          "name": "Demo User 2",
+          "url": "https://facebook.com/demouser2",
+          "verified": true
+        },
+        "metrics": {
+          "like_count": 79,
+          "comment_count": 27,
+          "share_count": 8,
+          "reaction_count": 98
+        },
+        "post_type": "demo_post",
+        "source": "facebook_demo",
+        "platform": "snscrape"
+      }
+    ],
+    "robotic pet": [
+      {
+        "id": "fb_demo_0",
+        "content": "这是一个关于'robotic pet'的Facebook模拟帖子。实际使用中，您需要使用Facebook的官方API或其他数据源。",
+        "url": "https://facebook.com/demo/post/0",
+        "date": "2025-08-25T19:27:22.735085",
+        "user": {
+          "name": "Demo User 0",
+          "url": "https://facebook.com/demouser0",
+          "verified": true
+        },
+        "metrics": {
+          "like_count": 19,
+          "comment_count": 24,
+          "share_count": 18,
+          "reaction_count": 37
+        },
+        "post_type": "demo_post",
+        "source": "facebook_demo",
+        "platform": "snscrape"
+      },
+      {
+        "id": "fb_demo_1",
+        "content": "这是一个关于'robotic pet'的Facebook模拟帖子。实际使用中，您需要使用Facebook的官方API或其他数据源。",
+        "url": "https://facebook.com/demo/post/1",
+        "date": "2025-08-25T18:27:22.735085",
+        "user": {
+          "name": "Demo User 1",
+          "url": "https://facebook.com/demouser1",
+          "verified": false
+        },
+        "metrics": {
+          "like_count": 75,
+          "comment_count": 49,
+          "share_count": 1,
+          "reaction_count": 21
+        },
+        "post_type": "demo_post",
+        "source": "facebook_demo",
+        "platform": "snscrape"
+      },
+      {
+        "id": "fb_demo_2",
+        "content": "这是一个关于'robotic pet'的Facebook模拟帖子。实际使用中，您需要使用Facebook的官方API或其他数据源。",
+        "url": "https://facebook.com/demo/post/2",
+        "date": "2025-08-25T17:27:22.735085",
+        "user": {
+          "name": "Demo User 2",
+          "url": "https://facebook.com/demouser2",
+          "verified": true
+        },
+        "metrics": {
+          "like_count": 38,
+          "comment_count": 26,
+          "share_count": 14,
+          "reaction_count": 95
+        },
+        "post_type": "demo_post",
+        "source": "facebook_demo",
+        "platform": "snscrape"
+      }
+    ]
+  },
+  "timestamp": 119001.093,
+  "summary": {
+    "total_pages_tested": 0,
+    "total_searches_tested": 6,
+    "total_posts": 18
+  }
+}

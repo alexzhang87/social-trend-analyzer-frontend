@@ -1,0 +1,35 @@
+services:
+  - type: web
+    name: ai-data-collector
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python master_data_scheduler.py
+    envVars:
+      - key: PYTHONPATH
+        value: /opt/render/project/src
+      - key: PORT
+        value: 10000
+      - key: ENVIRONMENT
+        value: production
+      - key: DATA_COLLECTION_ENABLED
+        value: true
+      - key: COLLECTION_INTERVAL_HOURS
+        value: 6
+      - key: MAX_DAILY_COLLECTIONS
+        value: 4
+      - key: QUALITY_THRESHOLD
+        value: 0.7
+      # API密钥需要在Render控制台手动设置
+      - key: ZHIPU_API_KEY
+        sync: false
+      - key: TWITTERAPI_IO_KEY
+        sync: false
+      - key: REDDIT_CLIENT_ID
+        sync: false
+      - key: REDDIT_CLIENT_SECRET
+        sync: false
+      - key: GITHUB_TOKEN
+        sync: false
+    healthCheckPath: /health
+    autoDeploy: true

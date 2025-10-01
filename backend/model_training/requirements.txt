@@ -1,0 +1,60 @@
+# AI产品训练数据自动收集系统 - 依赖包
+
+# 原有训练依赖
+torch==2.1.1
+transformers==4.35.2
+datasets==2.14.6
+accelerate==0.24.1
+evaluate==0.4.1
+scikit-learn==1.3.2
+pandas==2.0.3
+numpy==1.24.3
+matplotlib==3.7.2
+seaborn==0.12.2
+tqdm==4.66.1
+
+# 数据收集系统新增依赖
+asyncio-throttle==1.0.2
+aiohttp==3.9.1
+requests==2.32.2
+schedule==1.2.0
+
+# API客户端
+praw==7.7.1  # Reddit API
+PyGithub==1.59.1  # GitHub API
+tweepy==4.14.0  # Twitter API
+
+# 文本处理和NLP
+nltk==3.8.1
+textblob==0.17.1
+tokenizers==0.15.0
+
+# 环境变量和配置
+python-dotenv==1.0.0
+
+# 云端部署支持
+boto3==1.34.0  # AWS
+azure-storage-blob==12.19.0  # Azure
+google-cloud-storage==2.10.0  # Google Cloud
+gunicorn==21.2.0
+
+# 数据验证和处理
+jsonschema==4.20.0
+marshmallow==3.20.1
+
+# 网络和HTTP
+urllib3==2.2.3
+certifi==2025.8.3
+charset-normalizer==3.4.3
+
+# 时间处理
+pytz==2020.1
+python-dateutil==2.8.2
+
+# 性能监控
+psutil==5.9.6
+memory-profiler==0.61.0
+
+# 测试框架
+pytest==7.4.3
+pytest-asyncio==0.21.1

@@ -1,0 +1,185 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&family=Orbitron:wght@400;500;600;700;800;900&family=Exo+2:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Canva-inspired Clean Theme for Global Users */
+    --background: 0 0% 98%;    /* Clean white background */
+    --foreground: 220 15% 20%; /* Dark gray text */
+    --card: 0 0% 100%;         /* Pure white cards */
+    --card-foreground: 220 15% 20%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 15% 20%;
+    
+    /* Canva Brand Colors */
+    --primary: 195 94% 42%;    /* Canva Light Blue #07B9CE */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 91% 62%;  /* Canva Blue #3969E7 */
+    --secondary-foreground: 0 0% 100%;
+    --accent: 260 82% 54%;     /* Canva Purple #7D2AE7 */
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;  /* Red for errors */
+    --destructive-foreground: 0 0% 100%;
+    
+    --muted: 220 15% 95%;
+    --muted-foreground: 220 15% 40%;
+    --border: 220 15% 90%;
+    --input: 220 15% 90%;
+    --ring: 195 94% 42%;
+    --radius: 0.75rem;
+    
+    /* Chart colors with Canva theme */
+    --chart-1: 195 94% 42%;   /* Canva Light Blue */
+    --chart-2: 220 91% 62%;   /* Canva Blue */
+    --chart-3: 260 82% 54%;   /* Canva Purple */
+    --chart-4: 45 93% 58%;    /* Warm yellow */
+    --chart-5: 0 84% 60%;     /* Red */
+    
+    /* Clean glass morphism */
+    --glass-bg: rgba(255, 255, 255, 0.8);
+    --glass-border: rgba(7, 185, 206, 0.2);
+    
+    /* Subtle glow effects */
+    --glow-primary: 0 0 20px rgba(7, 185, 206, 0.3);
+    --glow-secondary: 0 0 20px rgba(57, 105, 231, 0.3);
+    --glow-accent: 0 0 20px rgba(125, 42, 231, 0.3);
+    
+    /* Clean grid pattern */
+    --grid-color: rgba(7, 185, 206, 0.05);
+    
+    /* Canva-style gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(195, 94%, 42%) 0%, hsl(220, 91%, 62%) 100%);
+    --gradient-secondary: linear-gradient(135deg, hsl(220, 91%, 62%) 0%, hsl(260, 82%, 54%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(260, 82%, 54%) 0%, hsl(195, 94%, 42%) 100%);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: 'Inter', 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Clean subtle grid background */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+      linear-gradient(rgba(7, 185, 206, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(7, 185, 206, 0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+    animation: grid-move 30s linear infinite;
+    pointer-events: none;
+    z-index: -1;
+  }
+}
+
+@layer utilities {
+  /* Modern Animations */
+  .animate-fade-in {
+    animation: fade-in 0.5s ease-out forwards;
+  }
+
+  .animate-slide-up {
+    animation: slide-up 0.8s ease-out forwards;
+  }
+
+  .animate-glow-pulse {
+    animation: glow-pulse 2s ease-in-out infinite;
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .animate-shimmer {
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.4),
+      transparent
+    );
+    background-size: 1000px 100%;
+    animation: shimmer 2s linear infinite;
+  }
+
+  /* Glass morphism utilities */
+  .glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+  }
+
+  .glass-card {
+    @apply glass rounded-lg shadow-lg;
+  }
+
+  /* Gradient utilities */
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+
+  .gradient-secondary {
+    background: var(--gradient-secondary);
+  }
+
+  .gradient-accent {
+    background: var(--gradient-accent);
+  }
+
+  /* Glow effects */
+  .glow-primary {
+    box-shadow: var(--glow-primary);
+  }
+
+  .glow-secondary {
+    box-shadow: var(--glow-secondary);
+  }
+
+  .glow-accent {
+    box-shadow: var(--glow-accent);
+  }
+
+  /* Text effects */
+  .text-gradient {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Scrollbar styling */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: hsl(var(--muted));
+    border-radius: 3px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: hsl(var(--primary));
+    border-radius: 3px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary) / 0.8);
+  }
+}

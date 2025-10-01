@@ -1,0 +1,56 @@
+{
+  "enhanced_experts": {
+    "business_strategist": {
+      "description": "Business Strategy Expert - Trained on real business cases and market analysis",
+      "available_examples": 5,
+      "enhancement_active": true,
+      "specialties": [
+        "Market Entry",
+        "Growth Strategy",
+        "Competitive Analysis",
+        "Business Planning"
+      ]
+    },
+    "technical_advisor": {
+      "description": "Technical Advisor - Trained on technical support and system integration data",
+      "available_examples": 4,
+      "enhancement_active": true,
+      "specialties": [
+        "System Integration",
+        "API Development",
+        "Technical Troubleshooting",
+        "Software Architecture"
+      ]
+    },
+    "market_researcher": {
+      "description": "Market Research Analyst - Trained on customer consultation and market data",
+      "available_examples": 3,
+      "enhancement_active": true,
+      "specialties": [
+        "Market Analysis",
+        "Customer Insights",
+        "Trend Analysis",
+        "Competitive Intelligence"
+      ]
+    },
+    "product_manager": {
+      "description": "Product Manager - Trained on product strategy and user experience data",
+      "available_examples": 2,
+      "enhancement_active": true,
+      "specialties": [
+        "Product Strategy",
+        "User Experience",
+        "Feature Planning",
+        "Product Roadmap"
+      ]
+    }
+  },
+  "enhancement_config": {
+    "min_quality_threshold": 0.8,
+    "max_examples_per_query": 3,
+    "relevance_threshold": 0.3,
+    "language": "english",
+    "target_market": "international",
+    "last_updated": "2025-09-26T19:22:33.305211"
+  }
+}

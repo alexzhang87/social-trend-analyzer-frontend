@@ -1,0 +1,82 @@
+{
+  "keywords": {
+    "trending": [
+      {
+        "keyword": "AI写作工具",
+        "growth": 156,
+        "volume": 125000,
+        "competition": "medium",
+        "opportunity_score": 85
+      },
+      {
+        "keyword": "自动化内容",
+        "growth": 89,
+        "volume": 78000,
+        "competition": "low",
+        "opportunity_score": 78
+      },
+      {
+        "keyword": "智能编辑",
+        "growth": 67,
+        "volume": 56000,
+        "competition": "medium",
+        "opportunity_score": 72
+      }
+    ],
+    "insights": [
+      {
+        "type": "opportunity",
+        "title": "高潜力机会",
+        "description": "AI写作工具搜索量激增，但现有产品用户满意度偏低",
+        "confidence": 0.85
+      }
+    ]
+  },
+  "pmf": {
+    "overall_score": 65,
+    "metrics": {
+      "user_satisfaction": 72,
+      "retention_7d": 58,
+      "nps": 45,
+      "feature_adoption": 63
+    },
+    "pain_points": [
+      {
+        "area": "内容生成速度",
+        "severity": "high",
+        "user_feedback_count": 234
+      },
+      {
+        "area": "智能编辑功能",
+        "severity": "medium",
+        "user_feedback_count": 156
+      }
+    ]
+  },
+  "correlations": [
+    {
+      "keyword": "AI写作工具",
+      "pmf_impact": 0.73,
+      "recommendation": "重点优化此关键词相关功能"
+    },
+    {
+      "keyword": "内容生成速度",
+      "pmf_impact": 0.68,
+      "recommendation": "用户痛点与关键词趋势高度吻合"
+    }
+  ],
+  "recommendations": [
+    {
+      "priority": "high",
+      "action": "提升内容生成速度",
+      "rationale": "关键词数据显示用户痛点，PMF调研证实需求强烈",
+      "expected_impact": "PMF分数预期提升15-20分"
+    },
+    {
+      "priority": "medium",
+      "action": "增强智能编辑功能",
+      "rationale": "新兴关键词趋势，用户访谈验证需求",
+      "expected_impact": "用户满意度预期提升10-15%"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "enhanced_experts": {
+    "business_strategist": {
+      "description": "商业策略专家 - 基于真实案例训练",
+      "available_examples": 11,
+      "enhancement_active": true
+    },
+    "technical_advisor": {
+      "description": "技术顾问 - 基于技术支持数据训练",
+      "available_examples": 6,
+      "enhancement_active": true
+    },
+    "market_researcher": {
+      "description": "市场研究员 - 基于客户咨询数据训练",
+      "available_examples": 11,
+      "enhancement_active": true
+    },
+    "product_manager": {
+      "description": "产品经理 - 基于产品策略数据训练",
+      "available_examples": 11,
+      "enhancement_active": true
+    }
+  },
+  "enhancement_config": {
+    "min_quality_threshold": 0.8,
+    "max_examples_per_query": 3,
+    "relevance_threshold": 0.3,
+    "last_updated": "2025-09-26T19:14:40.219399"
+  }
+}

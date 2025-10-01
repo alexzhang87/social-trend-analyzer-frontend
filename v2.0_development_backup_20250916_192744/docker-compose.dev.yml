@@ -1,0 +1,94 @@
+version: '3.8'
+
+services:
+  # 前端开发服务
+  frontend-dev:
+    build:
+      context: ./social-trend-analyzer
+      dockerfile: Dockerfile
+      target: development
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - REACT_APP_API_URL=http://localhost:8000
+      - CHOKIDAR_USEPOLLING=true
+    volumes:
+      - ./social-trend-analyzer:/app
+      - /app/node_modules
+    depends_on:
+      - backend-dev
+    networks:
+      - dev-network
+    stdin_open: true
+    tty: true
+
+  # 后端开发服务
+  backend-dev:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=sqlite:///./app_dev.db
+      - REDIS_URL=redis://redis-dev:6379
+      - SECRET_KEY=dev-secret-key
+      - DEBUG=true
+      - LOG_LEVEL=DEBUG
+      - CORS_ORIGINS=http://localhost:3000,http://localhost:3001
+    env_file:
+      - ./.env.development
+    volumes:
+      - ./backend:/app
+      - backend-dev-data:/app/data
+    depends_on:
+      - redis-dev
+    networks:
+      - dev-network
+    command: >
+      sh -c "pip install watchdog &&
+             uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload"
+
+  # Redis开发服务
+  redis-dev:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-dev-data:/data
+    networks:
+      - dev-network
+    command: redis-server --appendonly yes
+
+  # 数据库管理工具（可选）
+  adminer:
+    image: adminer
+    ports:
+      - "8080:8080"
+    networks:
+      - dev-network
+    profiles:
+      - tools
+
+  # Redis管理工具（可选）
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    environment:
+      - REDIS_HOSTS=local:redis-dev:6379
+    ports:
+      - "8081:8081"
+    depends_on:
+      - redis-dev
+    networks:
+      - dev-network
+    profiles:
+      - tools
+
+volumes:
+  redis-dev-data:
+  backend-dev-data:
+
+networks:
+  dev-network:
+    driver: bridge

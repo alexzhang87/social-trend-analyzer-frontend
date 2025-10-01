@@ -1,0 +1,167 @@
+{
+  "summary": {
+    "total_tests": 17,
+    "passed_tests": 11,
+    "failed_tests": 6,
+    "success_rate": 64.70588235294117
+  },
+  "test_results": [
+    {
+      "test_name": "健康检查端点",
+      "success": true,
+      "details": "API服务正常运行",
+      "error": "",
+      "timestamp": "2025-09-01T11:57:11.271882"
+    },
+    {
+      "test_name": "认证端点",
+      "success": false,
+      "details": "",
+      "error": "HTTPConnectionPool(host='localhost', port=8001): Read timed out. (read timeout=10)",
+      "timestamp": "2025-09-01T11:57:23.339252"
+    },
+    {
+      "test_name": "综合分析端点",
+      "success": false,
+      "details": "状态码: 403, 响应: {\"detail\":\"Not authenticated\"}",
+      "error": "",
+      "timestamp": "2025-09-01T11:57:27.952918"
+    },
+    {
+      "test_name": "Google Trends端点",
+      "success": true,
+      "details": "Google Trends数据获取成功",
+      "error": "",
+      "timestamp": "2025-09-01T11:57:35.248211"
+    },
+    {
+      "test_name": "MonkeyLearn端点",
+      "success": true,
+      "details": "文本分析成功",
+      "error": "",
+      "timestamp": "2025-09-01T11:57:37.294230"
+    },
+    {
+      "test_name": "管理员端点",
+      "success": false,
+      "details": "用户统计失败，状态码: 422",
+      "error": "",
+      "timestamp": "2025-09-01T11:57:41.686974"
+    },
+    {
+      "test_name": "前端可访问性",
+      "success": false,
+      "details": "",
+      "error": "HTTPConnectionPool(host='localhost', port=3001): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001B960001F40>: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。'))",
+      "timestamp": "2025-09-01T11:57:45.783026"
+    },
+    {
+      "test_name": "数据库操作",
+      "success": false,
+      "details": "",
+      "error": "(sqlite3.OperationalError) no such table: users\n[SQL: SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.full_name AS users_full_name, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.role AS users_role, users.subscription_tier AS users_subscription_tier, users.credits_balance AS users_credits_balance, users.subscription_expires_at AS users_subscription_expires_at, users.created_at AS users_created_at, users.updated_at AS users_updated_at, users.last_login AS users_last_login \nFROM users\n LIMIT ? OFFSET ?]\n[parameters: (5, 0)]\n(Background on this error at: https://sqlalche.me/e/20/e3q8)",
+      "timestamp": "2025-09-01T11:57:46.251542"
+    },
+    {
+      "test_name": "基础分析服务",
+      "success": true,
+      "details": "分析服务正常工作",
+      "error": "",
+      "timestamp": "2025-09-01T11:57:51.683474"
+    },
+    {
+      "test_name": "综合分析服务",
+      "success": true,
+      "details": "综合分析服务正常工作",
+      "error": "",
+      "timestamp": "2025-09-01T11:57:51.684012"
+    },
+    {
+      "test_name": "用户注册",
+      "success": true,
+      "details": "注册成功",
+      "error": "",
+      "timestamp": "2025-09-01T11:57:54.020308"
+    },
+    {
+      "test_name": "用户登录",
+      "success": true,
+      "details": "登录成功，获取到token",
+      "error": "",
+      "timestamp": "2025-09-01T11:57:56.374351"
+    },
+    {
+      "test_name": "综合分析端点",
+      "success": true,
+      "details": "分析成功，返回完整数据结构",
+      "error": "",
+      "timestamp": "2025-09-01T11:58:02.568863"
+    },
+    {
+      "test_name": "Google Trends端点",
+      "success": true,
+      "details": "Google Trends数据获取成功",
+      "error": "",
+      "timestamp": "2025-09-01T11:58:07.586504"
+    },
+    {
+      "test_name": "端到端工作流程",
+      "success": true,
+      "details": "完整工作流程测试成功",
+      "error": "",
+      "timestamp": "2025-09-01T11:58:07.586504"
+    },
+    {
+      "test_name": "API响应时间",
+      "success": false,
+      "details": "响应时间过长: 2.07秒",
+      "error": "",
+      "timestamp": "2025-09-01T11:58:09.653047"
+    },
+    {
+      "test_name": "并发请求测试",
+      "success": true,
+      "details": "5/5 请求成功",
+      "error": "",
+      "timestamp": "2025-09-01T11:58:11.725643"
+    }
+  ],
+  "bugs_found": [
+    {
+      "test_name": "认证端点",
+      "error": "HTTPConnectionPool(host='localhost', port=8001): Read timed out. (read timeout=10)",
+      "details": "",
+      "timestamp": "2025-09-01T11:57:23.339252"
+    },
+    {
+      "test_name": "综合分析端点",
+      "error": "",
+      "details": "状态码: 403, 响应: {\"detail\":\"Not authenticated\"}",
+      "timestamp": "2025-09-01T11:57:27.952918"
+    },
+    {
+      "test_name": "管理员端点",
+      "error": "",
+      "details": "用户统计失败，状态码: 422",
+      "timestamp": "2025-09-01T11:57:41.686974"
+    },
+    {
+      "test_name": "前端可访问性",
+      "error": "HTTPConnectionPool(host='localhost', port=3001): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001B960001F40>: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。'))",
+      "details": "",
+      "timestamp": "2025-09-01T11:57:45.783026"
+    },
+    {
+      "test_name": "数据库操作",
+      "error": "(sqlite3.OperationalError) no such table: users\n[SQL: SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.full_name AS users_full_name, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.role AS users_role, users.subscription_tier AS users_subscription_tier, users.credits_balance AS users_credits_balance, users.subscription_expires_at AS users_subscription_expires_at, users.created_at AS users_created_at, users.updated_at AS users_updated_at, users.last_login AS users_last_login \nFROM users\n LIMIT ? OFFSET ?]\n[parameters: (5, 0)]\n(Background on this error at: https://sqlalche.me/e/20/e3q8)",
+      "details": "",
+      "timestamp": "2025-09-01T11:57:46.251542"
+    },
+    {
+      "test_name": "API响应时间",
+      "error": "",
+      "details": "响应时间过长: 2.07秒",
+      "timestamp": "2025-09-01T11:58:09.653047"
+    }
+  ]
+}

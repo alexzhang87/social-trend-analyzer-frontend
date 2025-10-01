@@ -1,0 +1,217 @@
+{
+  "generated_at": "2024-01-15T10:00:00Z",
+  "keywords": ["tesla", "AI", "chatgpt", "cryptocurrency", "startup", "technology", "innovation"],
+  "stats": {
+    "total_posts": 2500,
+    "platforms": {
+      "twitter": 1500,
+      "reddit": 1000
+    },
+    "date_range": {
+      "start": "2024-01-01",
+      "end": "2024-01-15"
+    }
+  },
+  "data": [
+    {
+      "text": "Tesla's new Model 3 refresh is absolutely stunning! The interior upgrades and improved range make it a game-changer in the EV market. #Tesla #ElectricVehicles",
+      "author": "TechEnthusiast2024",
+      "platform": "twitter",
+      "created_at": "2024-01-15T09:30:00Z",
+      "likes": 1247,
+      "retweets": 342,
+      "sentiment": "positive",
+      "keywords_matched": ["tesla"]
+    },
+    {
+      "text": "Just tested ChatGPT-4 for code generation and I'm blown away. It's writing production-ready React components with proper error handling. The future of development is here!",
+      "author": "DevMaster_JS",
+      "platform": "twitter",
+      "created_at": "2024-01-15T08:45:00Z",
+      "likes": 892,
+      "retweets": 156,
+      "sentiment": "positive",
+      "keywords_matched": ["AI", "chatgpt"]
+    },
+    {
+      "text": "Unpopular opinion: Tesla's autopilot still has too many edge cases. Had a scary moment yesterday when it didn't detect a construction zone properly. Safety first, innovation second.",
+      "author": "SafetyFirst_Driver",
+      "platform": "twitter",
+      "created_at": "2024-01-15T07:20:00Z",
+      "likes": 445,
+      "retweets": 89,
+      "sentiment": "negative",
+      "keywords_matched": ["tesla"]
+    },
+    {
+      "text": "The AI revolution is happening faster than anyone predicted. From ChatGPT to autonomous vehicles, we're witnessing the biggest technological shift since the internet.",
+      "author": "FutureTechAnalyst",
+      "platform": "twitter",
+      "created_at": "2024-01-15T06:15:00Z",
+      "likes": 2156,
+      "retweets": 678,
+      "sentiment": "positive",
+      "keywords_matched": ["AI", "chatgpt"]
+    },
+    {
+      "text": "Bitcoin hitting $45K again! The crypto market is showing strong resilience. Institutional adoption continues to drive long-term growth. #Bitcoin #Cryptocurrency",
+      "author": "CryptoInvestor_Pro",
+      "platform": "twitter",
+      "created_at": "2024-01-15T05:30:00Z",
+      "likes": 1834,
+      "retweets": 423,
+      "sentiment": "positive",
+      "keywords_matched": ["cryptocurrency"]
+    },
+    {
+      "text": "Starting a tech startup in 2024 feels both exciting and terrifying. The competition is fierce, but the opportunities with AI integration are endless. Any advice from fellow entrepreneurs?",
+      "author": "StartupFounder_2024",
+      "platform": "reddit",
+      "created_at": "2024-01-15T04:45:00Z",
+      "likes": 67,
+      "comments": 23,
+      "sentiment": "neutral",
+      "keywords_matched": ["startup", "AI", "technology"]
+    },
+    {
+      "text": "Tesla's Supercharger network opening to other EVs is brilliant strategy. They're not just selling cars, they're building the infrastructure for the entire industry.",
+      "author": "ElectricVehicleNews",
+      "platform": "twitter",
+      "created_at": "2024-01-15T03:20:00Z",
+      "likes": 756,
+      "retweets": 198,
+      "sentiment": "positive",
+      "keywords_matched": ["tesla"]
+    },
+    {
+      "text": "ChatGPT is amazing for brainstorming, but I'm concerned about students using it for homework. We need better AI detection tools in education.",
+      "author": "EducatorConcerns",
+      "platform": "reddit",
+      "created_at": "2024-01-15T02:10:00Z",
+      "likes": 234,
+      "comments": 45,
+      "sentiment": "neutral",
+      "keywords_matched": ["chatgpt", "AI"]
+    },
+    {
+      "text": "The innovation happening in the tech space right now is unprecedented. From quantum computing breakthroughs to AI advances, we're living in the future.",
+      "author": "TechVisionaryMind",
+      "platform": "twitter",
+      "created_at": "2024-01-15T01:30:00Z",
+      "likes": 1423,
+      "retweets": 287,
+      "sentiment": "positive",
+      "keywords_matched": ["technology", "innovation", "AI"]
+    },
+    {
+      "text": "Crypto market volatility is insane. One day you're up 20%, next day down 15%. Only invest what you can afford to lose, folks. #CryptoReality",
+      "author": "RealisticTrader",
+      "platform": "twitter",
+      "created_at": "2024-01-15T00:45:00Z",
+      "likes": 567,
+      "retweets": 134,
+      "sentiment": "neutral",
+      "keywords_matched": ["cryptocurrency"]
+    },
+    {
+      "text": "Tesla Model Y is the perfect family EV. Spacious, efficient, and the tech features keep the kids entertained on long trips. Best car purchase I've made!",
+      "author": "FamilyEVOwner",
+      "platform": "reddit",
+      "created_at": "2024-01-14T23:20:00Z",
+      "likes": 156,
+      "comments": 28,
+      "sentiment": "positive",
+      "keywords_matched": ["tesla"]
+    },
+    {
+      "text": "AI is transforming healthcare faster than expected. From drug discovery to diagnostic imaging, the potential to save lives is enormous.",
+      "author": "HealthTechInnovator",
+      "platform": "twitter",
+      "created_at": "2024-01-14T22:15:00Z",
+      "likes": 934,
+      "retweets": 245,
+      "sentiment": "positive",
+      "keywords_matched": ["AI", "technology", "innovation"]
+    },
+    {
+      "text": "Building a startup without proper market research is like driving blindfolded. Do your homework, validate your assumptions, then build.",
+      "author": "StartupMentor_Wisdom",
+      "platform": "reddit",
+      "created_at": "2024-01-14T21:30:00Z",
+      "likes": 89,
+      "comments": 15,
+      "sentiment": "neutral",
+      "keywords_matched": ["startup"]
+    },
+    {
+      "text": "ChatGPT's latest update with image analysis is incredible. I can now upload screenshots and get detailed explanations. This is a productivity game-changer!",
+      "author": "ProductivityHacker",
+      "platform": "twitter",
+      "created_at": "2024-01-14T20:45:00Z",
+      "likes": 1678,
+      "retweets": 456,
+      "sentiment": "positive",
+      "keywords_matched": ["chatgpt", "AI"]
+    },
+    {
+      "text": "Tesla's stock price doesn't reflect the company's innovation. They're not just an automaker, they're an energy and AI company. Long-term bullish.",
+      "author": "InvestmentAnalyst_Pro",
+      "platform": "twitter",
+      "created_at": "2024-01-14T19:20:00Z",
+      "likes": 823,
+      "retweets": 167,
+      "sentiment": "positive",
+      "keywords_matched": ["tesla", "AI"]
+    },
+    {
+      "text": "The technology sector is experiencing a renaissance. Innovation cycles are accelerating, and the next decade will bring changes we can't even imagine yet.",
+      "author": "TechFuturist2024",
+      "platform": "reddit",
+      "created_at": "2024-01-14T18:10:00Z",
+      "likes": 145,
+      "comments": 32,
+      "sentiment": "positive",
+      "keywords_matched": ["technology", "innovation"]
+    },
+    {
+      "text": "Cryptocurrency adoption by major corporations is accelerating. We're moving from speculation to real utility. The infrastructure is finally maturing.",
+      "author": "CorporateCryptoNews",
+      "platform": "twitter",
+      "created_at": "2024-01-14T17:30:00Z",
+      "likes": 1245,
+      "retweets": 298,
+      "sentiment": "positive",
+      "keywords_matched": ["cryptocurrency"]
+    },
+    {
+      "text": "AI ethics is becoming more important as these systems become more powerful. We need frameworks to ensure responsible development and deployment.",
+      "author": "AIEthicsAdvocate",
+      "platform": "reddit",
+      "created_at": "2024-01-14T16:45:00Z",
+      "likes": 78,
+      "comments": 19,
+      "sentiment": "neutral",
+      "keywords_matched": ["AI"]
+    },
+    {
+      "text": "Tesla's manufacturing efficiency improvements are impressive. They're proving that American manufacturing can compete globally when innovation is prioritized.",
+      "author": "ManufacturingExpert",
+      "platform": "twitter",
+      "created_at": "2024-01-14T15:20:00Z",
+      "likes": 567,
+      "retweets": 123,
+      "sentiment": "positive",
+      "keywords_matched": ["tesla", "innovation"]
+    },
+    {
+      "text": "Startup funding landscape is tough right now, but companies with real AI integration and clear value propositions are still getting funded.",
+      "author": "VentureCapitalInsider",
+      "platform": "reddit",
+      "created_at": "2024-01-14T14:15:00Z",
+      "likes": 234,
+      "comments": 67,
+      "sentiment": "neutral",
+      "keywords_matched": ["startup", "AI"]
+    }
+  ]
+}

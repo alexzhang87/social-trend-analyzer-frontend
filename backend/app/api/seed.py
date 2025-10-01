@@ -2,14 +2,15 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from typing import List
 
-from ..data.models import database, schemas
+from ..data.models.database import get_db, RawPost
+from ..data.models.schemas import PostCreate, Post
 
 router = APIRouter()
 
 @router.post("/api/seed", summary="Seed the database with raw posts")
 def seed_database(
-    posts: List[schemas.PostCreate], 
-    db: Session = Depends(database.get_db)
+    posts: List[PostCreate], 
+    db: Session = Depends(get_db)
 ):
     """
     Accepts a list of posts and saves them to the database.
@@ -19,14 +20,14 @@ def seed_database(
         new_posts_count = 0
         for post_data in posts:
             # Check if a post with this URL already exists to ensure idempotency
-            existing_post = db.query(database.RawPost).filter(database.RawPost.url == post_data.url).first()
+            existing_post = db.query(RawPost).filter(RawPost.url == post_data.url).first()
             if not existing_post:
-                db_post = database.RawPost(**post_data.model_dump())
+                db_post = RawPost(**post_data.model_dump())
                 db.add(db_post)
                 new_posts_count += 1
         
         db.commit()
-        total_posts = db.query(database.RawPost).count()
+        total_posts = db.query(RawPost).count()
         return {
             "message": f"Seeding complete. Added {new_posts_count} new posts.",
             "total_posts_in_db": total_posts

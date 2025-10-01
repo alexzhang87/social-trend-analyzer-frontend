@@ -10,18 +10,27 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # 复制依赖文件
-# The build context is the root of the repo, so we need to specify the path
-COPY backend/requirements.txt .
+COPY requirements.txt .
 
 # 安装 Python 依赖
 RUN pip install --no-cache-dir -r requirements.txt
 
 # 复制应用代码
-# Copy only the backend application code into the container's WORKDIR
-COPY backend/ .
+COPY . .
+
+# 创建必要的目录
+RUN mkdir -p ./uploads ./data
+
+# 设置环境变量
+ENV PYTHONPATH=/app
+ENV ENVIRONMENT=production
 
 # 暴露端口
 EXPOSE 8000
 
+# 健康检查
+HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:${PORT:-8000}/ || exit 1
+
 # 启动命令 (使用 Railway 分配的端口)
-CMD ["sh", "-c", "uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}"]
+CMD ["sh", "-c", "uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000} --workers 1"]

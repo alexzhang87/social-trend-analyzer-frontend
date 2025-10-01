@@ -1,0 +1,364 @@
+from typing import List
+from ..data.models import database
+from .llm_service import get_llm_provider
+from .large_dataset_service import LargeDatasetService
+import logging
+
+logger = logging.getLogger("trend-analyzer")
+
+class AnalysisService:
+    """趋势分析服务 - 完全同步版本"""
+    
+    def __init__(self):
+        logger.info("AnalysisService 已初始化")
+        try:
+            self.llm_provider = get_llm_provider()
+            logger.info("LLM provider 初始化成功")
+        except Exception as e:
+            logger.error(f"LLM provider 初始化失败: {e}")
+            self.llm_provider = None
+        
+        # 初始化大规模数据集服务
+        self.dataset_service = LargeDatasetService()
+
+    def analyze(self, keywords: List[str]) -> dict:
+        """
+        使用大规模数据集分析关键词趋势（完全同步版本）
+        
+        Args:
+            keywords: 关键词列表
+            
+        Returns:
+            dict: 包含趋势分析结果的字典
+        """
+        logger.info(f"开始分析关键词: {keywords}")
+        
+        try:
+            # 从大规模数据集中搜索相关帖子
+            posts = self.dataset_service.search_posts(keywords, limit=1000)
+            
+            if not posts:
+                logger.warning("未找到相关帖子数据")
+                return self.get_empty_analysis_result(keywords)
+            
+            logger.info(f"找到 {len(posts)} 条相关帖子")
+            
+            # 获取数据统计
+            platform_stats = self.dataset_service.get_platform_distribution(posts)
+            sentiment_stats = self.dataset_service.get_sentiment_distribution(posts)
+            engagement_stats = self.dataset_service.get_engagement_stats(posts)
+            
+            logger.info(f"平台分布: {platform_stats}")
+            logger.info(f"情感分布: {sentiment_stats}")
+            
+            # 格式化数据供LLM分析
+            formatted_posts = self.dataset_service.format_posts_for_analysis(posts)
+            
+            # 如果LLM provider不可用，使用增强的备用分析
+            if not self.llm_provider:
+                logger.warning("LLM provider 不可用，使用增强的备用分析")
+                return self._get_enhanced_fallback_analysis(posts, keywords, platform_stats, sentiment_stats, engagement_stats)
+            
+            try:
+                # 使用LLM生成分析结果
+                logger.info("开始LLM分析...")
+                llm_result = self.llm_provider.generate_insights_for_cluster(formatted_posts[:100])  # 限制LLM处理的数据量
+                
+                # 合并LLM结果和统计数据
+                analysis_result = self._merge_llm_and_stats(llm_result, posts, keywords, platform_stats, sentiment_stats, engagement_stats)
+                
+                logger.info("大规模数据集分析完成")
+                return analysis_result
+                
+            except Exception as e:
+                logger.error(f"LLM分析失败: {e}，使用增强的备用分析")
+                return self._get_enhanced_fallback_analysis(posts, keywords, platform_stats, sentiment_stats, engagement_stats)
+                
+        except Exception as e:
+            logger.error(f"分析过程发生错误: {e}，返回空结果")
+            return self.get_empty_analysis_result(keywords)
+
+    def get_empty_analysis_result(self, keywords: List[str]) -> dict:
+        """
+        返回空的分析结果结构
+        """
+        return {
+            "title": f"关于 {', '.join(keywords)} 的趋势分析",
+            "summary": f"未找到关于 {', '.join(keywords)} 的相关数据。建议尝试其他关键词或稍后再试。",
+            "hypeIndex": {
+                "score": 0,
+                "reasoning": "未找到相关数据"
+            },
+            "sentimentSpectrum": {
+                "positive": 0,
+                "neutral": 0,
+                "negative": 0,
+                "questioning": 0,
+                "total": 0
+            },
+            "keyThemes": [],
+            "userPersonaSnapshot": {
+                "description": "暂无用户画像数据",
+                "interests": [],
+                "demographics": "未知"
+            },
+            "businessOpportunities": [],
+            "topMentions": [],
+            "keywords": keywords,
+            "dataSource": "大规模模拟数据集",
+            "analysisTimestamp": "刚刚"
+        }
+
+    def _merge_llm_and_stats(self, llm_result: dict, posts: List[dict], keywords: List[str], 
+                           platform_stats: dict, sentiment_stats: dict, engagement_stats: dict) -> dict:
+        """合并LLM分析结果和统计数据"""
+        
+        # 计算情感百分比
+        total_posts = len(posts)
+        sentiment_percentages = {
+            "positive": int((sentiment_stats.get("positive", 0) / total_posts) * 100) if total_posts > 0 else 0,
+            "neutral": int((sentiment_stats.get("neutral", 0) / total_posts) * 100) if total_posts > 0 else 0,
+            "negative": int((sentiment_stats.get("negative", 0) / total_posts) * 100) if total_posts > 0 else 0,
+            "questioning": 5,  # 默认值
+            "total": 100
+        }
+        
+        # 计算热度指数
+        hype_score = self._calculate_hype_score(posts, engagement_stats, sentiment_stats)
+        
+        return {
+            "title": llm_result.get("title", f"关于 {', '.join(keywords)} 的趋势分析"),
+            "summary": llm_result.get("summary", f"基于 {total_posts} 条社交媒体帖子的AI分析结果"),
+            "hypeIndex": {
+                "score": hype_score,
+                "reasoning": f"基于 {total_posts} 条帖子的综合分析，包含 {platform_stats.get('twitter', 0)} 条Twitter和 {platform_stats.get('reddit', 0)} 条Reddit数据"
+            },
+            "sentimentSpectrum": sentiment_percentages,
+            "keyThemes": llm_result.get("keyThemes", self._extract_themes_from_posts(posts)),
+            "userPersonaSnapshot": llm_result.get("userPersonaSnapshot", {
+                "personas": ["技术爱好者", "行业观察者"],
+                "coreNeeds": ["获取最新信息", "了解市场趋势"]
+            }),
+            "actionableOpportunities": llm_result.get("actionableOpportunities", self._generate_opportunities(keywords, sentiment_stats)),
+            "top_mentions": self._format_top_mentions_from_posts(posts[:5]),
+            "keywords": keywords
+        }
+
+    def _get_enhanced_fallback_analysis(self, posts: List[dict], keywords: List[str], 
+                                      platform_stats: dict, sentiment_stats: dict, engagement_stats: dict) -> dict:
+        """增强的备用分析，基于统计数据"""
+        total_posts = len(posts)
+        hype_score = self._calculate_hype_score(posts, engagement_stats, sentiment_stats)
+        
+        return {
+            "title": f"关于 {', '.join(keywords)} 的趋势分析",
+            "summary": f"基于 {total_posts} 条社交媒体帖子的统计分析，{', '.join(keywords)} 相关话题显示出一定的关注度。",
+            "hypeIndex": {
+                "score": hype_score,
+                "reasoning": f"基于 {total_posts} 条帖子的数据统计分析"
+            },
+            "sentimentSpectrum": {
+                "positive": int((sentiment_stats.get("positive", 0) / total_posts) * 100) if total_posts > 0 else 0,
+                "neutral": int((sentiment_stats.get("neutral", 0) / total_posts) * 100) if total_posts > 0 else 0,
+                "negative": int((sentiment_stats.get("negative", 0) / total_posts) * 100) if total_posts > 0 else 0,
+                "questioning": 5,
+                "total": 100
+            },
+            "keyThemes": self._extract_themes_from_posts(posts),
+            "userPersonaSnapshot": {
+                "personas": ["技术爱好者", "行业观察者", "普通用户"],
+                "coreNeeds": ["获取最新信息", "寻求使用建议"]
+            },
+            "actionableOpportunities": self._generate_opportunities(keywords, sentiment_stats),
+            "top_mentions": self._format_top_mentions_from_posts(posts[:5]),
+            "keywords": keywords
+        }
+
+    def _calculate_hype_score(self, posts: List[dict], engagement_stats: dict, sentiment_stats: dict) -> int:
+        """计算热度指数"""
+        if not posts:
+            return 50
+        
+        # 基于帖子数量
+        post_count_score = min(len(posts) / 10, 40)  # 最多40分
+        
+        # 基于情感分布
+        positive_ratio = sentiment_stats.get("positive", 0) / len(posts) if posts else 0
+        sentiment_score = positive_ratio * 30  # 最多30分
+        
+        # 基于互动数据
+        total_engagement = engagement_stats.get('twitter_stats', {}).get('total_engagement', 0) + \
+                          engagement_stats.get('reddit_stats', {}).get('total_engagement', 0)
+        engagement_score = min(total_engagement / 1000, 30)  # 最多30分
+        
+        return int(post_count_score + sentiment_score + engagement_score)
+
+    def _extract_themes_from_posts(self, posts: List[dict]) -> List[dict]:
+        """从帖子中提取主题"""
+        themes = []
+        
+        # 基于关键词频率分析
+        keyword_counts = {}
+        for post in posts:
+            text = post.get('text', '').lower()
+            words = text.split()
+            for word in words:
+                if len(word) > 3:  # 只考虑长度大于3的词
+                    keyword_counts[word] = keyword_counts.get(word, 0) + 1
+        
+        # 获取最频繁的词作为主题
+        top_keywords = sorted(keyword_counts.items(), key=lambda x: x[1], reverse=True)[:3]
+        
+        for keyword, count in top_keywords:
+            themes.append({
+                "theme": keyword.capitalize(),
+                "summary": f"在 {count} 条帖子中被提及",
+                "isEmerging": count > len(posts) * 0.1  # 如果超过10%的帖子提及，认为是新兴主题
+            })
+        
+        return themes if themes else [
+            {"theme": "技术讨论", "summary": "用户对技术发展的讨论", "isEmerging": True}
+        ]
+
+    def _generate_opportunities(self, keywords: List[str], sentiment_stats: dict) -> List[dict]:
+        """生成商业机会"""
+        opportunities = []
+        
+        positive_count = sentiment_stats.get("positive", 0)
+        negative_count = sentiment_stats.get("negative", 0)
+        
+        if positive_count > negative_count:
+            opportunities.append({
+                "opportunity": "内容营销",
+                "description": f"利用用户对 {', '.join(keywords)} 的积极情绪，创建相关教育内容",
+                "targetPersona": "技术爱好者"
+            })
+        
+        if negative_count > 0:
+            opportunities.append({
+                "opportunity": "问题解决方案",
+                "description": f"针对用户在 {', '.join(keywords)} 方面的困惑，提供解决方案",
+                "targetPersona": "普通用户"
+            })
+        
+        return opportunities
+
+    def _format_top_mentions_from_posts(self, posts: List[dict]) -> List[dict]:
+        """从帖子数据格式化热门提及"""
+        formatted_mentions = []
+        
+        for post in posts:
+            formatted_mention = {
+                "platform": post.get("platform", "twitter"),
+                "author": post.get("author", "anonymous"),
+                "text": post.get("text", "")[:200],  # 限制长度
+                "url": post.get("url", ""),
+                "likes": post.get("likes", post.get("upvotes", 0)),
+                "sentiment": post.get("sentiment", "neutral")
+            }
+            formatted_mentions.append(formatted_mention)
+        
+        return formatted_mentions
+
+    # 保留原有的analyze_trends方法以保持兼容性
+    async def analyze_trends(self, posts: List[database.RawPost], keywords: List[str]) -> dict:
+        """
+        使用LLM分析社交媒体帖子的趋势（兼容性方法）
+        """
+        logger.info(f"使用兼容性方法分析 {len(posts)} 条帖子的趋势，关键词: {keywords}")
+        
+        # 转换为新的analyze方法
+        return self.analyze(keywords)
+    
+    def _format_top_mentions(self, llm_mentions: List[dict], posts: List[database.RawPost]) -> List[dict]:
+        """格式化热门提及数据，确保包含所有必需字段（兼容性方法）"""
+        formatted_mentions = []
+        
+        # 使用LLM返回的mentions，如果没有则使用原始posts
+        mentions_source = llm_mentions if llm_mentions else posts[:3]
+        
+        for i, mention in enumerate(mentions_source):
+            if isinstance(mention, dict):
+                # LLM返回的格式
+                formatted_mention = {
+                    "platform": mention.get("platform", "twitter"),
+                    "author": mention.get("author", f"user_{i}"),
+                    "text": mention.get("text", ""),
+                    "url": mention.get("url", f"https://twitter.com/user_{i}/status/{1234567890 + i}"),
+                    "likes": mention.get("likes", mention.get("engagement", 100 + i * 10)),
+                    "sentiment": mention.get("sentiment", "positive").lower()
+                }
+            else:
+                # RawPost对象格式
+                formatted_mention = {
+                    "platform": mention.platform,
+                    "author": mention.author or f"user_{i}",
+                    "text": mention.text,
+                    "url": mention.url,
+                    "likes": mention.likes or (100 + i * 10),
+                    "sentiment": "positive"  # 默认情感
+                }
+            
+            formatted_mentions.append(formatted_mention)
+        
+        return formatted_mentions
+    
+    def _get_fallback_analysis(self, posts: List[database.RawPost], keywords: List[str]) -> dict:
+        """备用分析结果，当LLM不可用时使用（兼容性方法）"""
+        return {
+            "title": f"关于 {', '.join(keywords)} 的趋势分析",
+            "summary": f"基于 {len(posts)} 条社交媒体帖子的分析，{', '.join(keywords)} 相关话题呈现积极趋势。用户对此话题表现出高度关注和参与度。",
+            "hypeIndex": {
+                "score": 75,
+                "reasoning": "基于帖子数量和用户参与度的估算"
+            },
+            "sentimentSpectrum": {
+                "positive": 55,
+                "neutral": 30,
+                "negative": 10,
+                "questioning": 5,
+                "total": 100
+            },
+            "keyThemes": [
+                {
+                    "theme": "技术创新",
+                    "summary": "用户对新技术特性和创新应用表现出浓厚兴趣",
+                    "isEmerging": True
+                },
+                {
+                    "theme": "用户体验",
+                    "summary": "关注产品易用性和用户界面设计",
+                    "isEmerging": False
+                }
+            ],
+            "userPersonaSnapshot": {
+                "personas": ["技术爱好者", "行业专家", "普通用户"],
+                "coreNeeds": ["获取最新信息", "技术学习", "产品体验"]
+            },
+            "actionableOpportunities": [
+                {
+                    "opportunity": "内容营销",
+                    "description": "创建教育性内容来满足用户的学习需求",
+                    "targetPersona": "技术爱好者"
+                }
+            ],
+            "top_mentions": [
+                {
+                    "platform": "twitter",
+                    "author": "tech_expert_01",
+                    "text": f"刚刚体验了最新的 {keywords[0] if keywords else 'AI'} 功能，真的很棒！推荐大家试试。",
+                    "url": "https://twitter.com/tech_expert_01/status/1234567890",
+                    "likes": 156,
+                    "sentiment": "positive"
+                },
+                {
+                    "platform": "twitter", 
+                    "author": "user_feedback",
+                    "text": f"对于 {keywords[0] if keywords else 'AI'} 的发展很期待，希望能解决现有的一些问题。",
+                    "url": "https://twitter.com/user_feedback/status/1234567891",
+                    "likes": 89,
+                    "sentiment": "neutral"
+                }
+            ],
+            "keywords": keywords
+        }

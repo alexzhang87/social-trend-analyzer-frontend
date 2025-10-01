@@ -1,0 +1,35 @@
+[build]
+builder = "dockerfile"
+dockerfilePath = "Dockerfile"
+buildCommand = "echo 'Building AI Data Collection System'"
+
+[deploy]
+healthcheckPath = "/health"
+healthcheckTimeout = 300
+restartPolicyType = "on_failure"
+restartPolicyMaxRetries = 10
+startCommand = "python master_data_scheduler.py"
+
+[[services]]
+name = "ai-data-collector"
+
+[services.variables]
+# API Keys - 需要在Railway控制台中设置
+# REDDIT_CLIENT_ID = "your_reddit_client_id"
+# REDDIT_CLIENT_SECRET = "your_reddit_client_secret"
+# REDDIT_USER_AGENT = "your_reddit_user_agent"
+# GITHUB_TOKENS = "token1,token2,token3"
+# TWITTER_BEARER_TOKEN = "your_twitter_bearer_token"
+# HUGGINGFACE_TOKEN = "your_huggingface_token"
+
+# Database Configuration
+# DATABASE_URL = "sqlite:///./collection_tracking.db"
+
+# Collection Settings
+# COLLECTION_ENABLED = "true"
+# MAX_DAILY_COLLECTIONS = "5000"
+# QUALITY_THRESHOLD = "0.7"
+
+# Monitoring
+# LOG_LEVEL = "INFO"
+# ENABLE_MONITORING = "true"

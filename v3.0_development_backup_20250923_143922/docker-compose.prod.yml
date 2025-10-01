@@ -1,0 +1,168 @@
+version: '3.8'
+
+services:
+  # Nginx反向代理
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./ssl:/etc/nginx/ssl
+      - nginx-logs:/var/log/nginx
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - prod-network
+    restart: unless-stopped
+
+  # 前端生产服务
+  frontend:
+    build:
+      context: ./social-trend-analyzer
+      dockerfile: Dockerfile
+      target: production
+    expose:
+      - "80"
+    networks:
+      - prod-network
+    restart: unless-stopped
+
+  # 后端生产服务
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    expose:
+      - "8000"
+    environment:
+      - DATABASE_URL=postgresql://postgres:${POSTGRES_PASSWORD}@postgres:5432/social_trends
+      - REDIS_URL=redis://redis:6379
+      - SECRET_KEY=${SECRET_KEY}
+      - DEBUG=false
+      - LOG_LEVEL=INFO
+      - WORKERS=4
+    env_file:
+      - ./.env.production
+    volumes:
+      - backend-logs:/app/logs
+      - backend-data:/app/data
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - prod-network
+    restart: unless-stopped
+    deploy:
+      replicas: 2
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1G
+        reservations:
+          cpus: '0.5'
+          memory: 512M
+
+  # PostgreSQL生产数据库
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_DB=social_trends
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_INITDB_ARGS=--encoding=UTF-8 --lc-collate=C --lc-ctype=C
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - postgres-logs:/var/log/postgresql
+      - ./backend/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - prod-network
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 2G
+        reservations:
+          cpus: '1.0'
+          memory: 1G
+
+  # Redis生产缓存
+  redis:
+    image: redis:7-alpine
+    volumes:
+      - redis-data:/data
+      - ./redis/redis.conf:/usr/local/etc/redis/redis.conf
+    networks:
+      - prod-network
+    restart: unless-stopped
+    command: redis-server /usr/local/etc/redis/redis.conf
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+
+  # 监控服务
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus-data:/prometheus
+    networks:
+      - prod-network
+    restart: unless-stopped
+    profiles:
+      - monitoring
+
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3001:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD}
+    volumes:
+      - grafana-data:/var/lib/grafana
+    networks:
+      - prod-network
+    restart: unless-stopped
+    profiles:
+      - monitoring
+
+  # 日志收集
+  fluentd:
+    image: fluent/fluentd:v1.16-debian-1
+    volumes:
+      - ./logging/fluentd.conf:/fluentd/etc/fluent.conf
+      - backend-logs:/var/log/backend
+      - nginx-logs:/var/log/nginx
+    networks:
+      - prod-network
+    restart: unless-stopped
+    profiles:
+      - logging
+
+volumes:
+  postgres-data:
+  redis-data:
+  backend-data:
+  backend-logs:
+  nginx-logs:
+  postgres-logs:
+  prometheus-data:
+  grafana-data:
+
+networks:
+  prod-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16

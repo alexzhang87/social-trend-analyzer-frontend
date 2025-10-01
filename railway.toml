@@ -1,20 +1,24 @@
 [build]
 builder = "dockerfile"
-dockerfilePath = "backend/Dockerfile"
+dockerfilePath = "Dockerfile.railway"
 buildCommand = "echo 'Building Python backend'"
 
 [deploy]
-healthcheckPath = "/api/v1/health/"
-healthcheckTimeout = 300
+healthcheckPath = "/"
+healthcheckTimeout = 60
 restartPolicyType = "on_failure"
-restartPolicyMaxRetries = 10
-startCommand = "sh -c 'uvicorn app.main:app --host 0.0.0.0 --port $PORT'"
+restartPolicyMaxRetries = 3
 
 [[services]]
 name = "social-trend-analyzer-api"
 
 [services.variables]
-# 这些环境变量将在 Railway 控制台中设置
+# 生产环境变量 - 在Railway控制台中设置实际值
+ENVIRONMENT = "production"
+DATABASE_URL = "sqlite:///./app.db"
+REDIS_URL = ""
+LOG_LEVEL = "INFO"
+# API密钥 - 需要在Railway控制台中设置
 # ZHIPU_API_KEY = "your_zhipu_api_key"
 # TWITTERAPI_IO_KEY = "your_twitter_api_key"
-# DATABASE_URL = "sqlite:///./app.db"
+# OPENAI_API_KEY = "your_openai_api_key"

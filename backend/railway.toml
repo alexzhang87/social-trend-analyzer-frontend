@@ -1,14 +1,13 @@
 [build]
 builder = "dockerfile"
-dockerfilePath = "backend/Dockerfile"
+dockerfilePath = "Dockerfile"
 buildCommand = "echo 'Building Python backend'"
 
 [deploy]
-healthcheckPath = "/health"
+healthcheckPath = "/api/v1/health/"
 healthcheckTimeout = 300
 restartPolicyType = "on_failure"
 restartPolicyMaxRetries = 10
-startCommand = "uvicorn app.main:app --host 0.0.0.0 --port $PORT"
 
 [[services]]
 name = "social-trend-analyzer-api"

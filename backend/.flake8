@@ -1,0 +1,101 @@
+[flake8]
+# 最大行长度
+max-line-length = 88
+
+# 忽略的错误代码
+ignore = 
+    # E203: whitespace before ':' (conflicts with black)
+    E203,
+    # W503: line break before binary operator (conflicts with black)
+    W503,
+    # E501: line too long (handled by black)
+    E501,
+    # F401: imported but unused (handled by autoflake)
+    F401,
+    # E402: module level import not at top of file
+    E402
+
+# 排除的文件和目录
+exclude = 
+    .git,
+    __pycache__,
+    .pytest_cache,
+    .venv,
+    venv,
+    env,
+    .env,
+    build,
+    dist,
+    *.egg-info,
+    migrations,
+    .tox,
+    .coverage,
+    htmlcov,
+    node_modules,
+    .mypy_cache
+
+# 每个文件的最大复杂度
+max-complexity = 10
+
+# 导入顺序检查
+import-order-style = google
+application-import-names = app
+
+# 文档字符串检查
+docstring-convention = google
+
+# 启用的插件
+select = 
+    # pycodestyle errors
+    E,
+    # pycodestyle warnings  
+    W,
+    # pyflakes
+    F,
+    # mccabe complexity
+    C,
+    # flake8-docstrings
+    D,
+    # flake8-import-order
+    I,
+    # flake8-bugbear
+    B,
+    # flake8-comprehensions
+    C4,
+    # flake8-eradicate
+    E800,
+    # flake8-quotes
+    Q
+
+# 忽略特定文件的特定错误
+per-file-ignores =
+    # 测试文件可以有更长的行和更多的导入
+    tests/*:E501,F401,D,
+    # __init__.py 文件可以有未使用的导入
+    __init__.py:F401,
+    # 配置文件可以有更灵活的格式
+    */settings/*:E501,
+    # 迁移文件忽略大部分检查
+    */migrations/*:E501,F401,D,
+    # 脚本文件可以有更灵活的格式
+    scripts/*:E501,D
+
+# 内联注释的最小距离
+inline-quotes = double
+multiline-quotes = double
+
+# 统计信息
+statistics = True
+count = True
+
+# 显示源代码
+show-source = True
+
+# 基准测试
+benchmark = False
+
+# 输出格式
+format = default
+
+# 并行处理
+jobs = auto

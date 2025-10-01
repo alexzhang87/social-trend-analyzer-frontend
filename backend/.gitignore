@@ -1,0 +1,101 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Data files (large)
+collected_data/
+production_*/
+model_outputs/
+final_training_data/
+huggingface_data/
+test_stackoverflow_data/
+test_stackoverflow_data_fixed/
+validation_results/
+reports/
+*.json
+*.csv
+*.pth
+*.png
+*.jpg
+*.jpeg
+*.gif
+
+# Logs
+*.log
+logs/
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Cache
+.cache/
+.pytest_cache/
+
+# Temporary files
+*.tmp
+*.temp
+temp/
+tmp/
+
+# Large datasets
+large_*.json
+*_dataset.json
+*_data_*.json
+
+# Model files
+models/
+model_output/
+
+# Metabase
+metabase-test-deployment/

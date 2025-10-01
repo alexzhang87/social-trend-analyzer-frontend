@@ -1,0 +1,156 @@
+{
+  "summary": {
+    "total_tests": 18,
+    "passed_tests": 15,
+    "failed_tests": 3,
+    "success_rate": 83.33333333333334
+  },
+  "test_results": [
+    {
+      "test_name": "健康检查端点",
+      "success": true,
+      "details": "API服务正常运行",
+      "error": "",
+      "timestamp": "2025-09-01T12:02:15.774569"
+    },
+    {
+      "test_name": "用户注册",
+      "success": true,
+      "details": "注册成功",
+      "error": "",
+      "timestamp": "2025-09-01T12:02:18.116751"
+    },
+    {
+      "test_name": "用户登录",
+      "success": true,
+      "details": "登录成功，获取到token",
+      "error": "",
+      "timestamp": "2025-09-01T12:02:20.428375"
+    },
+    {
+      "test_name": "综合分析端点",
+      "success": true,
+      "details": "分析成功，返回完整数据结构",
+      "error": "",
+      "timestamp": "2025-09-01T12:02:26.646913"
+    },
+    {
+      "test_name": "Google Trends端点",
+      "success": true,
+      "details": "Google Trends数据获取成功",
+      "error": "",
+      "timestamp": "2025-09-01T12:02:32.713145"
+    },
+    {
+      "test_name": "MonkeyLearn端点",
+      "success": true,
+      "details": "文本分析成功",
+      "error": "",
+      "timestamp": "2025-09-01T12:02:34.771409"
+    },
+    {
+      "test_name": "管理员端点",
+      "success": true,
+      "details": "管理员功能正常",
+      "error": "",
+      "timestamp": "2025-09-01T12:02:39.211278"
+    },
+    {
+      "test_name": "前端可访问性",
+      "success": false,
+      "details": "",
+      "error": "HTTPConnectionPool(host='localhost', port=3001): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000153558719A0>: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。'))",
+      "timestamp": "2025-09-01T12:02:43.323121"
+    },
+    {
+      "test_name": "数据库操作",
+      "success": false,
+      "details": "",
+      "error": "(sqlite3.OperationalError) no such table: users\n[SQL: SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.full_name AS users_full_name, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.role AS users_role, users.subscription_tier AS users_subscription_tier, users.credits_balance AS users_credits_balance, users.subscription_expires_at AS users_subscription_expires_at, users.created_at AS users_created_at, users.updated_at AS users_updated_at, users.last_login AS users_last_login \nFROM users\n LIMIT ? OFFSET ?]\n[parameters: (5, 0)]\n(Background on this error at: https://sqlalche.me/e/20/e3q8)",
+      "timestamp": "2025-09-01T12:02:43.741059"
+    },
+    {
+      "test_name": "基础分析服务",
+      "success": true,
+      "details": "分析服务正常工作",
+      "error": "",
+      "timestamp": "2025-09-01T12:02:49.802443"
+    },
+    {
+      "test_name": "综合分析服务",
+      "success": true,
+      "details": "综合分析服务正常工作",
+      "error": "",
+      "timestamp": "2025-09-01T12:02:49.803426"
+    },
+    {
+      "test_name": "用户注册",
+      "success": true,
+      "details": "注册成功",
+      "error": "",
+      "timestamp": "2025-09-01T12:02:52.171030"
+    },
+    {
+      "test_name": "用户登录",
+      "success": true,
+      "details": "登录成功，获取到token",
+      "error": "",
+      "timestamp": "2025-09-01T12:02:54.498926"
+    },
+    {
+      "test_name": "综合分析端点",
+      "success": true,
+      "details": "分析成功，返回完整数据结构",
+      "error": "",
+      "timestamp": "2025-09-01T12:03:00.692712"
+    },
+    {
+      "test_name": "Google Trends端点",
+      "success": true,
+      "details": "Google Trends数据获取成功",
+      "error": "",
+      "timestamp": "2025-09-01T12:03:06.830882"
+    },
+    {
+      "test_name": "端到端工作流程",
+      "success": true,
+      "details": "完整工作流程测试成功",
+      "error": "",
+      "timestamp": "2025-09-01T12:03:06.831385"
+    },
+    {
+      "test_name": "API响应时间",
+      "success": false,
+      "details": "响应时间过长: 2.07秒",
+      "error": "",
+      "timestamp": "2025-09-01T12:03:08.899009"
+    },
+    {
+      "test_name": "并发请求测试",
+      "success": true,
+      "details": "5/5 请求成功",
+      "error": "",
+      "timestamp": "2025-09-01T12:03:10.982101"
+    }
+  ],
+  "bugs_found": [
+    {
+      "test_name": "前端可访问性",
+      "error": "HTTPConnectionPool(host='localhost', port=3001): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000153558719A0>: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。'))",
+      "details": "",
+      "timestamp": "2025-09-01T12:02:43.323121"
+    },
+    {
+      "test_name": "数据库操作",
+      "error": "(sqlite3.OperationalError) no such table: users\n[SQL: SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.full_name AS users_full_name, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.role AS users_role, users.subscription_tier AS users_subscription_tier, users.credits_balance AS users_credits_balance, users.subscription_expires_at AS users_subscription_expires_at, users.created_at AS users_created_at, users.updated_at AS users_updated_at, users.last_login AS users_last_login \nFROM users\n LIMIT ? OFFSET ?]\n[parameters: (5, 0)]\n(Background on this error at: https://sqlalche.me/e/20/e3q8)",
+      "details": "",
+      "timestamp": "2025-09-01T12:02:43.741059"
+    },
+    {
+      "test_name": "API响应时间",
+      "error": "",
+      "details": "响应时间过长: 2.07秒",
+      "timestamp": "2025-09-01T12:03:08.899009"
+    }
+  ]
+}

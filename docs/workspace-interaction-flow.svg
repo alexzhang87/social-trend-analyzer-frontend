@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1400" height="900" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .title { font-family: Arial, sans-serif; font-size: 18px; font-weight: bold; fill: #2c3e50; }
+      .step-title { font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; fill: #34495e; }
+      .step-text { font-family: Arial, sans-serif; font-size: 12px; fill: #7f8c8d; }
+      .action-text { font-family: Arial, sans-serif; font-size: 11px; fill: #e74c3c; }
+      .result-text { font-family: Arial, sans-serif; font-size: 11px; fill: #27ae60; }
+      .state-text { font-family: Arial, sans-serif; font-size: 10px; fill: #3498db; }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#3498db" />
+    </marker>
+    <marker id="red-arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#e74c3c" />
+    </marker>
+  </defs>
+  
+  <!-- 背景 -->
+  <rect width="1400" height="900" fill="#f8f9fa" stroke="#dee2e6" stroke-width="2"/>
+  
+  <!-- 标题 -->
+  <text x="700" y="30" text-anchor="middle" class="title">IdeaEden Workspace 用户交互流程图</text>
+  
+  <!-- 用户起点 -->
+  <circle cx="100" cy="100" r="40" fill="#3498db" stroke="#2980b9" stroke-width="3"/>
+  <text x="100" y="85" text-anchor="middle" class="step-title" fill="white">用户</text>
+  <text x="100" y="105" text-anchor="middle" class="step-text" fill="white">访问</text>
+  <text x="100" y="120" text-anchor="middle" class="step-text" fill="white">Workspace</text>
+  
+  <!-- Workspace 中心 -->
+  <rect x="250" y="60" width="200" height="80" fill="#34495e" stroke="#2c3e50" stroke-width="3" rx="10"/>
+  <text x="350" y="85" text-anchor="middle" class="step-title" fill="white">Unified Workspace</text>
+  <text x="350" y="105" text-anchor="middle" class="step-text" fill="white">统一工作台</text>
+  <text x="350" y="125" text-anchor="middle" class="state-text" fill="white">currentView: 'workspace'</text>
+  
+  <!-- 连接线：用户到工作台 -->
+  <line x1="140" y1="100" x2="250" y2="100" stroke="#3498db" stroke-width="3" marker-end="url(#arrow)"/>
+  <text x="195" y="95" text-anchor="middle" class="action-text">进入</text>
+  
+  <!-- AI Insights 路径 -->
+  <rect x="50" y="200" width="180" height="100" fill="#e74c3c" stroke="#c0392b" stroke-width="2" rx="8"/>
+  <text x="140" y="220" text-anchor="middle" class="step-title" fill="white">AI Insights</text>
+  <text x="140" y="240" text-anchor="middle" class="step-text" fill="white">点击卡片</text>
+  <text x="140" y="255" text-anchor="middle" class="state-text" fill="white">setCurrentView('analysis')</text>
+  <text x="140" y="270" text-anchor="middle" class="state-text" fill="white">setCurrentMode('professional')</text>
+  <text x="140" y="285" text-anchor="middle" class="state-text" fill="white">setCurrentKeyword('主题')</text>
+  
+  <!-- Keyword Analysis 路径 -->
+  <rect x="260" y="200" width="180" height="100" fill="#f39c12" stroke="#e67e22" stroke-width="2" rx="8"/>
+  <text x="350" y="220" text-anchor="middle" class="step-title" fill="white">Keyword Analysis</text>
+  <text x="350" y="240" text-anchor="middle" class="step-text" fill="white">输入关键词</text>
+  <text x="350" y="255" text-anchor="middle" class="state-text" fill="white">setIsLoading(true)</text>
+  <text x="350" y="270" text-anchor="middle" class="state-text" fill="white">analysisContext</text>
+  <text x="350" y="285" text-anchor="middle" class="state-text" fill="white">currentView='analysis'</text>
+  
+  <!-- PMF Evaluation 路径 -->
+  <rect x="470" y="200" width="180" height="100" fill="#9b59b6" stroke="#8e44ad" stroke-width="2" rx="8"/>
+  <text x="560" y="220" text-anchor="middle" class="step-title" fill="white">PMF Evaluation</text>
+  <text x="560" y="240" text-anchor="middle" class="step-text" fill="white">点击产品聚焦</text>
+  <text x="560" y="255" text-anchor="middle" class="state-text" fill="white">setCurrentView('pmf')</text>
+  <text x="560" y="270" text-anchor="middle" class="state-text" fill="white">setActiveSection('pmf')</text>
+  <text x="560" y="285" text-anchor="middle" class="state-text" fill="white">pmfContext</text>
+  
+  <!-- Competitor Monitoring 路径 -->
+  <rect x="680" y="200" width="180" height="100" fill="#e67e22" stroke="#d35400" stroke-width="2" rx="8"/>
+  <text x="770" y="220" text-anchor="middle" class="step-title" fill="white">Competitor Monitor</text>
+  <text x="770" y="240" text-anchor="middle" class="step-text" fill="white">点击竞争风险</text>
+  <text x="770" y="255" text-anchor="middle" class="state-text" fill="white">setCurrentView('analysis')</text>
+  <text x="770" y="270" text-anchor="middle" class="state-text" fill="white">currentKeyword='竞品主题'</text>
+  <text x="770" y="285" text-anchor="middle" class="state-text" fill="white">competitorContext</text>
+  
+  <!-- Trend Analytics 路径 -->
+  <rect x="890" y="200" width="180" height="100" fill="#1abc9c" stroke="#16a085" stroke-width="2" rx="8"/>
+  <text x="980" y="220" text-anchor="middle" class="step-title" fill="white">Trend Analytics</text>
+  <text x="980" y="240" text-anchor="middle" class="step-text" fill="white">点击增长预测</text>
+  <text x="980" y="255" text-anchor="middle" class="state-text" fill="white">setCurrentView('reports')</text>
+  <text x="980" y="270" text-anchor="middle" class="state-text" fill="white">activeSection='reports'</text>
+  <text x="980" y="285" text-anchor="middle" class="state-text" fill="white">trendContext</text>
+  
+  <!-- 从工作台到各模块的连接线 -->
+  <line x1="300" y1="140" x2="140" y2="200" stroke="#e74c3c" stroke-width="2" marker-end="url(#red-arrow)"/>
+  <line x1="330" y1="140" x2="350" y2="200" stroke="#f39c12" stroke-width="2" marker-end="url(#red-arrow)"/>
+  <line x1="360" y1="140" x2="560" y2="200" stroke="#9b59b6" stroke-width="2" marker-end="url(#red-arrow)"/>
+  <line x1="390" y1="140" x2="770" y2="200" stroke="#e67e22" stroke-width="2" marker-end="url(#red-arrow)"/>
+  <line x1="420" y1="140" x2="980" y2="200" stroke="#1abc9c" stroke-width="2" marker-end="url(#red-arrow)"/>
+  
+  <!-- 第二层：具体组件与视图 -->
+  <!-- Professional Analysis -->
+  <rect x="50" y="350" width="200" height="80" fill="#c0392b" stroke="#a93226" stroke-width="2" rx="6"/>
+  <text x="150" y="375" text-anchor="middle" class="step-title" fill="white">Professional Analysis</text>
+  <text x="150" y="395" text-anchor="middle" class="step-text" fill="white">专业分析视图</text>
+  <text x="150" y="410" text-anchor="middle" class="result-text" fill="white">商业解读 + 行动建议</text>
+  
+  <!-- Analysis Results -->
+  <rect x="280" y="350" width="200" height="80" fill="#d68910" stroke="#b7950b" stroke-width="2" rx="6"/>
+  <text x="380" y="375" text-anchor="middle" class="step-title" fill="white">Analysis Results</text>
+  <text x="380" y="395" text-anchor="middle" class="step-text" fill="white">分析结果展示</text>
+  <text x="380" y="410" text-anchor="middle" class="result-text" fill="white">指标可视化 + 基础洞察</text>
+  
+  <!-- PMF Components -->
+  <rect x="510" y="350" width="200" height="80" fill="#7d3c98" stroke="#6c3483" stroke-width="2" rx="6"/>
+  <text x="610" y="375" text-anchor="middle" class="step-title" fill="white">PMF Components</text>
+  <text x="610" y="395" text-anchor="middle" class="step-text" fill="white">评估 + 验证 + 评分卡</text>
+  <text x="610" y="410" text-anchor="middle" class="result-text" fill="white">PMF 评分 + 改进建议</text>
+  
+  <!-- Competitor Components -->
+  <rect x="740" y="350" width="200" height="80" fill="#ba4a00" stroke="#a04000" stroke-width="2" rx="6"/>
+  <text x="840" y="375" text-anchor="middle" class="step-title" fill="white">Competitor Components</text>
+  <text x="840" y="395" text-anchor="middle" class="step-text" fill="white">对比 + 预警</text>
+  <text x="840" y="410" text-anchor="middle" class="result-text" fill="white">差异化策略 + 风险提示</text>
+  
+  <!-- Trend Components -->
+  <rect x="970" y="350" width="200" height="80" fill="#138d75" stroke="#117a65" stroke-width="2" rx="6"/>
+  <text x="1070" y="375" text-anchor="middle" class="step-title" fill="white">Trend Components</text>
+  <text x="1070" y="395" text-anchor="middle" class="step-text" fill="white">图表 + 列表 + 模态</text>
+  <text x="1070" y="410" text-anchor="middle" class="result-text" fill="white">趋势可视化 + 机会识别</text>
+  
+  <!-- 第二层连接线 -->
+  <line x1="140" y1="300" x2="150" y2="350" stroke="#c0392b" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="350" y1="300" x2="380" y2="350" stroke="#d68910" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="560" y1="300" x2="610" y2="350" stroke="#7d3c98" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="770" y1="300" x2="840" y2="350" stroke="#ba4a00" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="980" y1="300" x2="1070" y2="350" stroke="#138d75" stroke-width="2" marker-end="url(#arrow)"/>
+  
+  <!-- Data Studio 汇聚层 -->
+  <rect x="400" y="500" width="300" height="100" fill="#2c3e50" stroke="#1b2631" stroke-width="3" rx="10"/>
+  <text x="550" y="525" text-anchor="middle" class="step-title" fill="white">Data Studio</text>
+  <text x="550" y="545" text-anchor="middle" class="step-text" fill="white">数据工作室</text>
+  <text x="550" y="565" text-anchor="middle" class="result-text" fill="white">报告生成 + 仪表盘 + 导出</text>
+  <text x="550" y="585" text-anchor="middle" class="state-text" fill="white">汇聚所有模块结果</text>
+  
+  <!-- 汇聚到 Data Studio 的连接线 -->
+  <line x1="150" y1="430" x2="450" y2="500" stroke="#27ae60" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="380" y1="430" x2="500" y2="500" stroke="#27ae60" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="610" y1="430" x2="550" y2="500" stroke="#27ae60" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="840" y1="430" x2="600" y2="500" stroke="#27ae60" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="1070" y1="430" x2="650" y2="500" stroke="#27ae60" stroke-width="2" marker-end="url(#arrow)"/>
+  
+  <!-- 用户旅程示例 -->
+  <text x="50" y="650" class="step-title">典型用户旅程示例：</text>
+  
+  <!-- 旅程1 -->
+  <rect x="50" y="670" width="250" height="60" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="1" rx="5"/>
+  <text x="60" y="690" class="action-text">旅程1：发现新趋势</text>
+  <text x="60" y="705" class="step-text">Workspace → AI Insights → Professional Analysis</text>
+  <text x="60" y="720" class="result-text">获得商业解读与行动建议</text>
+  
+  <!-- 旅程2 -->
+  <rect x="320" y="670" width="250" height="60" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="1" rx="5"/>
+  <text x="330" y="690" class="action-text">旅程2：关键词分析</text>
+  <text x="330" y="705" class="step-text">Workspace → Keyword Analysis → Results</text>
+  <text x="330" y="720" class="result-text">评估投放可行性与策略</text>
+  
+  <!-- 旅程3 -->
+  <rect x="590" y="670" width="250" height="60" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="1" rx="5"/>
+  <text x="600" y="690" class="action-text">旅程3：产品验证</text>
+  <text x="600" y="705" class="step-text">Workspace → PMF → Validation</text>
+  <text x="600" y="720" class="result-text">获得PMF评分与改进建议</text>
+  
+  <!-- 旅程4 -->
+  <rect x="860" y="670" width="250" height="60" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="1" rx="5"/>
+  <text x="870" y="690" class="action-text">旅程4：竞品分析</text>
+  <text x="870" y="705" class="step-text">Workspace → Competitor → Analysis</text>
+  <text x="870" y="720" class="result-text">制定差异化策略</text>
+  
+  <!-- 状态管理说明 -->
+  <text x="50" y="780" class="step-title">状态管理关键字段：</text>
+  <text x="50" y="800" class="state-text">• currentView: 'workspace' | 'analysis' | 'reports' | 'pmf' | 'competitors' | 'trends'</text>
+  <text x="50" y="815" class="state-text">• currentMode: 'professional' | 'basic'</text>
+  <text x="50" y="830" class="state-text">• currentKeyword: string（分析主题或关键词）</text>
+  <text x="50" y="845" class="state-text">• activeSection: string（当前活跃的子模块）</text>
+  <text x="50" y="860" class="state-text">• isLoading: boolean（加载状态）</text>
+  
+  <!-- 交互提示文案 -->
+  <text x="700" y="780" class="step-title">交互提示文案统一规范：</text>
+  <text x="700" y="800" class="result-text">• "→ 查看趋势机会分析"</text>
+  <text x="700" y="815" class="result-text">• "→ 查看趋势报告"</text>
+  <text x="700" y="830" class="result-text">• "→ 查看PMF评估"</text>
+  <text x="700" y="845" class="result-text">• "→ 查看竞品分析"</text>
+  <text x="700" y="860" class="result-text">• "→ 查看增长机会分析"</text>
+</svg>

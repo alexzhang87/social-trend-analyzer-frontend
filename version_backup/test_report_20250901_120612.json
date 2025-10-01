@@ -1,0 +1,157 @@
+{
+  "summary": {
+    "total_tests": 19,
+    "passed_tests": 17,
+    "failed_tests": 2,
+    "success_rate": 89.47368421052632
+  },
+  "test_results": [
+    {
+      "test_name": "健康检查端点",
+      "success": true,
+      "details": "API服务正常运行",
+      "error": "",
+      "timestamp": "2025-09-01T12:05:15.532320"
+    },
+    {
+      "test_name": "用户注册",
+      "success": true,
+      "details": "注册成功",
+      "error": "",
+      "timestamp": "2025-09-01T12:05:17.850603"
+    },
+    {
+      "test_name": "用户登录",
+      "success": true,
+      "details": "登录成功，获取到token",
+      "error": "",
+      "timestamp": "2025-09-01T12:05:20.196482"
+    },
+    {
+      "test_name": "综合分析端点",
+      "success": true,
+      "details": "分析成功，返回完整数据结构",
+      "error": "",
+      "timestamp": "2025-09-01T12:05:26.399788"
+    },
+    {
+      "test_name": "Google Trends端点",
+      "success": true,
+      "details": "Google Trends数据获取成功",
+      "error": "",
+      "timestamp": "2025-09-01T12:05:32.166585"
+    },
+    {
+      "test_name": "MonkeyLearn端点",
+      "success": true,
+      "details": "文本分析成功",
+      "error": "",
+      "timestamp": "2025-09-01T12:05:34.242961"
+    },
+    {
+      "test_name": "管理员端点",
+      "success": true,
+      "details": "管理员功能正常",
+      "error": "",
+      "timestamp": "2025-09-01T12:05:38.631511"
+    },
+    {
+      "test_name": "前端可访问性",
+      "success": false,
+      "details": "",
+      "error": "HTTPConnectionPool(host='localhost', port=3001): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001F724C61DF0>: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。'))",
+      "timestamp": "2025-09-01T12:05:42.734278"
+    },
+    {
+      "test_name": "数据库连接",
+      "success": true,
+      "details": "数据库状态: unknown",
+      "error": "",
+      "timestamp": "2025-09-01T12:05:44.792129"
+    },
+    {
+      "test_name": "数据库写入",
+      "success": true,
+      "details": "用户注册成功，数据库写入正常",
+      "error": "",
+      "timestamp": "2025-09-01T12:05:47.101914"
+    },
+    {
+      "test_name": "基础分析服务",
+      "success": true,
+      "details": "分析服务正常工作",
+      "error": "",
+      "timestamp": "2025-09-01T12:05:52.715370"
+    },
+    {
+      "test_name": "综合分析服务",
+      "success": true,
+      "details": "综合分析服务正常工作",
+      "error": "",
+      "timestamp": "2025-09-01T12:05:52.715370"
+    },
+    {
+      "test_name": "用户注册",
+      "success": true,
+      "details": "注册成功",
+      "error": "",
+      "timestamp": "2025-09-01T12:05:55.038524"
+    },
+    {
+      "test_name": "用户登录",
+      "success": true,
+      "details": "登录成功，获取到token",
+      "error": "",
+      "timestamp": "2025-09-01T12:05:57.347281"
+    },
+    {
+      "test_name": "综合分析端点",
+      "success": true,
+      "details": "分析成功，返回完整数据结构",
+      "error": "",
+      "timestamp": "2025-09-01T12:06:03.519387"
+    },
+    {
+      "test_name": "Google Trends端点",
+      "success": true,
+      "details": "Google Trends数据获取成功",
+      "error": "",
+      "timestamp": "2025-09-01T12:06:08.207728"
+    },
+    {
+      "test_name": "端到端工作流程",
+      "success": true,
+      "details": "完整工作流程测试成功",
+      "error": "",
+      "timestamp": "2025-09-01T12:06:08.208238"
+    },
+    {
+      "test_name": "API响应时间",
+      "success": false,
+      "details": "响应时间过长: 2.05秒",
+      "error": "",
+      "timestamp": "2025-09-01T12:06:10.256488"
+    },
+    {
+      "test_name": "并发请求测试",
+      "success": true,
+      "details": "5/5 请求成功",
+      "error": "",
+      "timestamp": "2025-09-01T12:06:12.329464"
+    }
+  ],
+  "bugs_found": [
+    {
+      "test_name": "前端可访问性",
+      "error": "HTTPConnectionPool(host='localhost', port=3001): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001F724C61DF0>: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。'))",
+      "details": "",
+      "timestamp": "2025-09-01T12:05:42.734278"
+    },
+    {
+      "test_name": "API响应时间",
+      "error": "",
+      "details": "响应时间过长: 2.05秒",
+      "timestamp": "2025-09-01T12:06:10.256488"
+    }
+  ]
+}

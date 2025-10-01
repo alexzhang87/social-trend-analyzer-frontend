@@ -1,0 +1,78 @@
+/* 演示项目样式 */
+.transition-all {
+    transition: all 0.3s ease;
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.step-active {
+    background-color: #3B82F6;
+    color: white;
+}
+
+.step-completed {
+    background-color: #10B981;
+    color: white;
+}
+
+.step-inactive {
+    background-color: #E5E7EB;
+    color: #6B7280;
+}
+
+/* 图表容器 */
+.chart-container {
+    position: relative;
+    height: 200px;
+    margin: 1rem 0;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .lg\:col-span-1 {
+        grid-column: span 1;
+    }
+}
+
+/* 动画效果 */
+.slide-in {
+    animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* 高亮效果 */
+.highlight {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+    border: 2px solid #3B82F6;
+}
+
+/* 进度条动画 */
+.progress-bar {
+    animation: progressFill 2s ease-out;
+}
+
+@keyframes progressFill {
+    from { width: 0%; }
+    to { width: 65%; }
+}
