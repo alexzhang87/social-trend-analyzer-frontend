@@ -17,6 +17,17 @@ class RedisClient:
             # 从环境变量获取Redis配置
             redis_url = getattr(settings, 'REDIS_URL', 'redis://localhost:6379/0')
             
+            # 优雅降级：如果未配置或为空字符串，则跳过连接，使用内存缓存
+            if not redis_url:
+                logger.info("未配置REDIS_URL，跳过Redis连接，将使用内存缓存")
+                self.redis_client = None
+                return
+            
+            if isinstance(redis_url, str) and redis_url.strip() == "":
+                logger.info("REDIS_URL为空字符串，跳过Redis连接，将使用内存缓存")
+                self.redis_client = None
+                return
+            
             if redis_url.startswith('redis://'):
                 self.redis_client = redis.from_url(redis_url, decode_responses=True)
             else:
@@ -33,7 +44,11 @@ class RedisClient:
             logger.info("Redis连接成功")
             
         except Exception as e:
-            logger.warning(f"Redis连接失败: {e}，将使用内存缓存")
+            # 若明确未配置REDIS_URL导致失败，作为信息日志处理；其他异常仍记为警告
+            if not getattr(settings, 'REDIS_URL', None):
+                logger.info(f"Redis未配置，使用内存缓存: {e}")
+            else:
+                logger.warning(f"Redis连接失败: {e}，将使用内存缓存")
             self.redis_client = None
     
     def is_connected(self) -> bool:
@@ -142,6 +157,16 @@ class RedisClient:
         except Exception as e:
             logger.error(f"Redis清除模式失败: {e}")
             return 0
+    
+    def keys(self, pattern: str) -> list:
+        """列出匹配模式的键"""
+        if not self.is_connected():
+            return []
+        try:
+            return self.redis_client.keys(pattern)
+        except Exception as e:
+            logger.error(f"Redis列出键失败: {e}")
+            return []
     
     def get_stats(self) -> dict:
         """获取Redis统计信息"""

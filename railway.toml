@@ -4,13 +4,14 @@ dockerfilePath = "Dockerfile.railway"
 buildCommand = "echo 'Building Python backend'"
 
 [deploy]
-healthcheckPath = "/"
-healthcheckTimeout = 60
+healthcheckPath = "/api/v1/health/"
+healthcheckTimeout = 300
 restartPolicyType = "on_failure"
 restartPolicyMaxRetries = 3
+startCommand = "sh -c 'python -m uvicorn app.main:app --host 0.0.0.0 --port $PORT --workers 1'"
 
 [[services]]
-name = "ai-data-collector"
+name = "ai data collector"
 
 [services.variables]
 # 生产环境变量 - 在Railway控制台中设置实际值
@@ -18,6 +19,7 @@ ENVIRONMENT = "production"
 DATABASE_URL = "sqlite:///./app.db"
 REDIS_URL = ""
 LOG_LEVEL = "INFO"
+PYTHONPATH = "/app:/app/app"
 # API密钥 - 需要在Railway控制台中设置
 # ZHIPU_API_KEY = "your_zhipu_api_key"
 # TWITTERAPI_IO_KEY = "your_twitter_api_key"

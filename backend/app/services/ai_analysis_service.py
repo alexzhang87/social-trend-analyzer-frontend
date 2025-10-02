@@ -142,9 +142,19 @@ class AIAnalysisService:
         try:
             # 检查缓存
             cache_key = f"sentiment:{hash(text)}"
-            cached_result = await redis_client.get(cache_key)
+            cached_result = redis_client.get(cache_key)
             if cached_result:
-                return SentimentResult(**json.loads(cached_result))
+                parsed = json.loads(cached_result) if isinstance(cached_result, str) else cached_result
+                # 兼容枚举字符串
+                if isinstance(parsed.get("sentiment"), str):
+                    try:
+                        from enum import Enum
+                        # 支持 "positive" 或 "SentimentType.POSITIVE"
+                        val = parsed["sentiment"].split(".")[-1]
+                        parsed["sentiment"] = SentimentType(val.lower()) if val.islower() else SentimentType[val]
+                    except Exception:
+                        parsed["sentiment"] = SentimentType.NEUTRAL
+                return SentimentResult(**parsed)
             
             # VADER情感分析
             vader_scores = self.sentiment_analyzer.polarity_scores(text)
@@ -185,10 +195,10 @@ class AIAnalysisService:
             )
             
             # 缓存结果
-            await redis_client.setex(
+            redis_client.set(
                 cache_key,
-                self.cache_ttl,
-                json.dumps(result.__dict__, default=str)
+                json.dumps(result.__dict__, default=str),
+                expire=self.cache_ttl
             )
             
             return result
@@ -225,9 +235,16 @@ class AIAnalysisService:
         try:
             # 检查缓存
             cache_key = f"trend:{hash(str(data))}{target_column}{time_horizon}"
-            cached_result = await redis_client.get(cache_key)
+            cached_result = redis_client.get(cache_key)
             if cached_result:
-                return TrendPrediction(**json.loads(cached_result))
+                parsed = json.loads(cached_result) if isinstance(cached_result, str) else cached_result
+                if isinstance(parsed.get("direction"), str):
+                    try:
+                        val = parsed["direction"].split(".")[-1]
+                        parsed["direction"] = TrendDirection(val.lower()) if val.islower() else TrendDirection[val]
+                    except Exception:
+                        parsed["direction"] = TrendDirection.STABLE
+                return TrendPrediction(**parsed)
             
             # 数据预处理
             df = pd.DataFrame(data)
@@ -322,10 +339,10 @@ class AIAnalysisService:
             )
             
             # 缓存结果
-            await redis_client.setex(
+            redis_client.set(
                 cache_key,
-                self.cache_ttl,
-                json.dumps(result.__dict__, default=str)
+                json.dumps(result.__dict__, default=str),
+                expire=self.cache_ttl,
             )
             
             return result
@@ -363,9 +380,15 @@ class AIAnalysisService:
         try:
             # 检查缓存
             cache_key = f"recommendations:{user_id}:{hash(str(user_profile))}"
-            cached_result = await redis_client.get(cache_key)
+            cached_result = redis_client.get(cache_key)
             if cached_result:
-                return PersonalizedRecommendations(**json.loads(cached_result))
+                try:
+                    if isinstance(cached_result, dict):
+                        return PersonalizedRecommendations(**cached_result)
+                    elif isinstance(cached_result, str):
+                        return PersonalizedRecommendations(**json.loads(cached_result))
+                except Exception:
+                    pass
             
             if not items:
                 return PersonalizedRecommendations(
@@ -426,10 +449,10 @@ class AIAnalysisService:
             )
             
             # 缓存结果
-            await redis_client.setex(
+            redis_client.set(
                 cache_key,
-                self.cache_ttl // 2,  # 推荐结果缓存时间较短
-                json.dumps(result.__dict__, default=str)
+                json.dumps(result.__dict__, default=str),
+                expire=self.cache_ttl // 2  # 推荐结果缓存时间较短
             )
             
             return result

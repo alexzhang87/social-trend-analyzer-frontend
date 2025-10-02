@@ -172,7 +172,7 @@ class CacheOptimizer:
             if redis_client.is_connected():
                 try:
                     # 获取所有键的TTL信息
-                    all_keys = redis_client.redis_client.keys('cache:*')
+                    all_keys = redis_client.keys('cache:*')
                     expired_count = 0
                     
                     for key in all_keys[:100]:  # 限制检查数量避免性能问题

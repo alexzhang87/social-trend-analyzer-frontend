@@ -31,17 +31,9 @@ class DataOptimizationService:
     async def _get_cache_stats(self) -> Dict[str, Any]:
         """获取缓存统计信息"""
         try:
-            if not redis_client.redis:
-                return {"status": "disconnected"}
-                
-            info = await redis_client.redis.info()
-            return {
-                "connected_clients": info.get("connected_clients", 0),
-                "used_memory": info.get("used_memory_human", "0B"),
-                "keyspace_hits": info.get("keyspace_hits", 0),
-                "keyspace_misses": info.get("keyspace_misses", 0),
-                "total_commands_processed": info.get("total_commands_processed", 0)
-            }
+            if not redis_client.is_connected():
+                return {"connected": False, "status": "disconnected"}
+            return redis_client.get_stats()
         except Exception as e:
             self.logger.error(f"获取缓存统计失败: {e}")
             return {"error": str(e)}
@@ -59,19 +51,15 @@ class DataOptimizationService:
     async def invalidate_cache(self, cache_type: str, pattern: Optional[str] = None) -> bool:
         """清除缓存"""
         try:
-            if not redis_client.redis:
+            if not redis_client.is_connected():
                 return False
-                
+            
             if pattern:
-                keys = await redis_client.redis.keys(f"{cache_type}:{pattern}*")
-                if keys:
-                    await redis_client.redis.delete(*keys)
+                deleted = redis_client.clear_pattern(f"{cache_type}:{pattern}*")
             else:
-                keys = await redis_client.redis.keys(f"{cache_type}:*")
-                if keys:
-                    await redis_client.redis.delete(*keys)
-                    
-            self.logger.info(f"缓存清除成功: {cache_type}, pattern: {pattern}")
+                deleted = redis_client.clear_pattern(f"{cache_type}:*")
+            
+            self.logger.info(f"缓存清除成功: {cache_type}, pattern: {pattern}, deleted: {deleted}")
             return True
         except Exception as e:
             self.logger.error(f"缓存清除失败: {e}")
@@ -109,11 +97,11 @@ class DataOptimizationService:
             }
             
             # 存储到Redis
-            if redis_client.redis:
-                await redis_client.redis.setex(
+            if redis_client.is_connected():
+                redis_client.set(
                     f"batch_job:{job_id}",
-                    3600,  # 1小时过期
-                    json.dumps(job_info)
+                    json.dumps(job_info),
+                    expire=3600
                 )
             
             self.logger.info(f"批处理任务创建成功: {job_id}")
@@ -125,14 +113,14 @@ class DataOptimizationService:
     async def get_batch_job_status(self, job_id: str) -> Dict[str, Any]:
         """获取批处理任务状态"""
         try:
-            if not redis_client.redis:
+            if not redis_client.is_connected():
                 return {"error": "Redis连接不可用"}
-                
-            job_data = await redis_client.redis.get(f"batch_job:{job_id}")
+            
+            job_data = redis_client.get(f"batch_job:{job_id}")
             if not job_data:
                 return {"error": "任务不存在"}
-                
-            return json.loads(job_data)
+            
+            return json.loads(job_data) if isinstance(job_data, str) else job_data
         except Exception as e:
             self.logger.error(f"获取批处理任务状态失败: {e}")
             return {"error": str(e)}
@@ -140,27 +128,27 @@ class DataOptimizationService:
     async def process_batch_jobs(self) -> List[Dict[str, Any]]:
         """处理批处理任务"""
         try:
-            if not redis_client.redis:
+            if not redis_client.is_connected():
                 return []
-                
+            
             # 获取所有待处理任务
-            job_keys = await redis_client.redis.keys("batch_job:*")
+            job_keys = redis_client.keys("batch_job:*")
             processed_jobs = []
             
             for key in job_keys:
-                job_data = await redis_client.redis.get(key)
+                job_data = redis_client.get(key)
                 if job_data:
-                    job_info = json.loads(job_data)
+                    job_info = json.loads(job_data) if isinstance(job_data, str) else job_data
                     if job_info.get("status") == "pending":
                         # 模拟处理任务
                         job_info["status"] = "completed"
                         job_info["completed_at"] = datetime.utcnow().isoformat()
                         
                         # 更新任务状态
-                        await redis_client.redis.setex(
+                        redis_client.set(
                             key,
-                            3600,
-                            json.dumps(job_info)
+                            job_info,
+                            expire=3600
                         )
                         
                         processed_jobs.append(job_info)

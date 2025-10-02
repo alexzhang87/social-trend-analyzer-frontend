@@ -22,17 +22,25 @@ class CreditExpiryTask:
     async def acquire_lock(self) -> bool:
         """获取任务锁，防止重复执行"""
         try:
-            # 使用Redis SET NX EX 命令获取锁
-            result = redis_client.set(
-                self.lock_key, 
-                datetime.utcnow().isoformat(), 
-                nx=True, 
-                ex=self.lock_timeout
-            )
-            return result is not None
+            # 在有Redis连接时，使用底层客户端的 SET NX EX 以实现分布式锁
+            if hasattr(redis_client, "is_connected") and redis_client.is_connected():
+                raw_client = getattr(redis_client, "redis_client", None)
+                if raw_client is not None:
+                    result = raw_client.set(
+                        self.lock_key,
+                        datetime.utcnow().isoformat(),
+                        nx=True,
+                        ex=self.lock_timeout,
+                    )
+                    return bool(result)
+                # 如果没有底层客户端，允许任务在单实例环境下运行
+                return True
+            # 无Redis连接时直接允许运行（单实例环境，不需要分布式锁）
+            return True
         except Exception as e:
             logger.error(f"Failed to acquire lock: {e}")
-            return False
+            # 出现错误时也允许执行，以避免阻塞任务
+            return True
     
     def release_lock(self):
         """释放任务锁"""
@@ -48,7 +56,8 @@ class CreditExpiryTask:
             if last_run_str is None:
                 return True
             
-            last_run = datetime.fromisoformat(last_run_str.decode())
+            # redis_client.get 返回字符串或JSON解析后的对象，不需要 decode
+            last_run = datetime.fromisoformat(last_run_str)
             now = datetime.utcnow()
             
             # 如果距离上次运行超过23小时，则可以运行
@@ -60,10 +69,11 @@ class CreditExpiryTask:
     def update_last_run(self):
         """更新最后运行时间"""
         try:
+            # 我们的 RedisClient.set 接口为 (key, value, expire)，不是 ex
             redis_client.set(
-                self.last_run_key, 
+                self.last_run_key,
                 datetime.utcnow().isoformat(),
-                ex=86400 * 7  # 保存7天
+                expire=86400 * 7  # 保存7天
             )
         except Exception as e:
             logger.error(f"Failed to update last run time: {e}")

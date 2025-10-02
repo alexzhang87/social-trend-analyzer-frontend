@@ -5,32 +5,34 @@ import uuid
 import json
 import time
 import threading
+import asyncio
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import hashlib
 from sqlalchemy.orm import Session
 
 from .analysis import AnalysisRequest
+
 def get_database_models():
     from ..data.models.database import User, CreditTransaction, SubscriptionTier, get_db
     return User, CreditTransaction, SubscriptionTier, get_db
-from ..services.analysis_service import AnalysisService
-from ..core.auth import (
-    get_current_active_user, 
-    require_basic_subscription, 
-    require_premium_subscription,
-    check_subscription_limit,
-    SUBSCRIPTION_LIMITS
-)
-from ..core.usage_tracker import usage_tracker
-from ..services.cache_service import cache_service, cached, cache_key_for_trends
 
+# 在路由与端点定义之前获取数据库依赖，避免 NameError
+User, CreditTransaction, SubscriptionTier, get_db = get_database_models()
+
+# 定义日志、路由、线程池与内存缓存
 logger = logging.getLogger("trend-analyzer")
 router = APIRouter()
+thread_pool = ThreadPoolExecutor(max_workers=8)
+memory_cache: Dict[str, Any] = {}
+cache_lock = threading.Lock()
 
-# 添加综合分析请求模型
+# 依赖导入（认证、配额与使用跟踪）
+from ..core.auth import get_current_active_user, SUBSCRIPTION_LIMITS, require_premium_subscription, check_subscription_limit
+from ..core.usage_tracker import usage_tracker
 from pydantic import BaseModel
 from typing import Optional
 
+# 请求模型补充（避免未定义）
 class ComprehensiveAnalysisRequest(BaseModel):
     keywords: List[str]
     platform_filter: Optional[str] = None
@@ -38,19 +40,40 @@ class ComprehensiveAnalysisRequest(BaseModel):
 
 class QuickValidateRequest(BaseModel):
     keywords: List[str]
-    
+
+class MarketDemand(BaseModel):
+    level: str
+    score: int
+    trend: str
+    volume: int
+
+class CompetitionInfo(BaseModel):
+    level: str
+    score: int
+    top_competitors: List[str] = []
+
+class RecommendationItem(BaseModel):
+    priority: str
+    action: str
+    reason: str
+
+class DataQualityInfo(BaseModel):
+    confidence: int
+    sources: List[str]
+    time_range: str
+
 class QuickValidateResponse(BaseModel):
     keyword: str
     pmf_score: int
-    market_demand: Dict[str, Any]
-    competition: Dict[str, Any]
-    recommendations: List[Dict[str, Any]]
-    data_quality: Dict[str, Any]
+    market_demand: MarketDemand
+    competition: CompetitionInfo
+    recommendations: List[RecommendationItem]
+    data_quality: DataQualityInfo
 
 class ProfessionalAnalysisRequest(BaseModel):
     keywords: List[str]
-    questionnaire_answers: Dict[str, str]
-    
+    questionnaire_answers: Dict[str, Any] = {}
+
 class ProfessionalAnalysisResponse(BaseModel):
     keyword: str
     executive_summary: str
@@ -62,48 +85,17 @@ class ProfessionalAnalysisResponse(BaseModel):
     risk_assessment: Dict[str, Any]
     data_quality: Dict[str, Any]
 
-# 全局线程池和缓存
-thread_pool = ThreadPoolExecutor(max_workers=8)
-memory_cache = {}
-cache_lock = threading.Lock()
-
+# 修复缩进错误：为以下已缩进的方法添加类定义包裹
 class HighPerformanceAnalyzer:
     def __init__(self):
+        from ..core.redis_client import redis_client
+        from ..services.analysis_service import AnalysisService
+        self.redis_client = redis_client
         self.analysis_service = AnalysisService()
-        self.redis_client = None
-        try:
-            import redis
-            self.redis_client = redis.Redis(host='localhost', port=6380, db=0, decode_responses=True)
-            self.redis_client.ping()
-            logger.info("Redis连接成功 (端口6380)")
-        except Exception as e:
-            logger.warning(f"Redis连接失败，使用内存缓存: {e}")
-            self.redis_client = None
-    
-    # 添加不同订阅等级的分析方法
-    @cached(ttl=1800, key_prefix="trends_free")
-    async def analyze_tier_free(self, keywords: List[str], platform_filter: str = None, time_range: str = None):
-        """FREE版分析"""
-        logger.info(f"执行FREE版分析: {keywords}")
-        return self.analysis_service.analyze_basic(keywords, platform_filter, time_range)
-    
-    @cached(ttl=1200, key_prefix="trends_starter")
-    async def analyze_tier_starter(self, keywords: List[str], platform_filter: str = None, time_range: str = None):
-        """STARTER版分析"""
-        logger.info(f"执行STARTER版分析: {keywords}")
-        return self.analysis_service.analyze_advanced(keywords, platform_filter, time_range)
-    
-    @cached(ttl=900, key_prefix="trends_pro")
-    async def analyze_tier_pro(self, keywords: List[str], platform_filter: str = None, time_range: str = None):
-        """PRO版分析"""
-        logger.info(f"执行PRO版分析: {keywords}")
-        return self.analysis_service.analyze_premium(keywords, platform_filter, time_range)
     
     def get_cache_key(self, keywords: List[str]) -> str:
-        """生成缓存键"""
-        sorted_keywords = sorted(keywords)
-        key_string = json.dumps(sorted_keywords, ensure_ascii=False)
-        return hashlib.md5(key_string.encode()).hexdigest()
+        normalized = ",".join(sorted([k.strip() for k in keywords]))
+        return hashlib.sha256(normalized.encode("utf-8")).hexdigest()
     
     def get_cached_result(self, cache_key: str) -> Dict[str, Any]:
         """获取缓存结果"""
@@ -147,12 +139,12 @@ class HighPerformanceAnalyzer:
             }
         
         # 设置Redis缓存
-        if self.redis_client:
+        if self.redis_client and self.redis_client.is_connected():
             try:
                 self.redis_client.set(
                     f"analysis:{cache_key}", 
                     json.dumps(result, ensure_ascii=False), 
-                    ex=3600
+                    expire=3600
                 )
                 logger.info(f"结果已缓存: {cache_key[:8]}...")
             except Exception as e:
@@ -346,7 +338,7 @@ async def comprehensive_analysis(
 def analyze_keywords_sync(
     request: AnalysisRequest, 
     current_user = Depends(get_current_active_user),
-    db: Session = Depends(lambda: get_database_models()[3]())
+    db: Session = Depends(get_db)
 ):
     """趋势分析 - 支持积分消费和功能分层"""
     try:
@@ -448,13 +440,14 @@ def get_cache_stats(current_user: User = Depends(get_current_active_user)):
     """缓存统计 - 所有用户可访问"""
     with cache_lock:
         memory_cache_size = len(memory_cache)
-        memory_cache_keys = list(memory_cache.keys())[:5]  # 显示前5个键
+        memory_cache_keys = list(memory_cache.keys())[:5]
     
     redis_info = "不可用"
     redis_keys_count = 0
-    if analyzer.redis_client:
+    if analyzer.redis_client and analyzer.redis_client.is_connected():
         try:
-            redis_keys_count = analyzer.redis_client.dbsize()
+            keys = analyzer.redis_client.keys("analysis:*")
+            redis_keys_count = len(keys) if keys else 0
             redis_info = "可用"
         except Exception as e:
             redis_info = f"连接失败: {e}"

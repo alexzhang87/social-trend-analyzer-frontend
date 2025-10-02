@@ -51,7 +51,7 @@ class EmailService:
             }
             
             if self.redis_client:
-                self.redis_client.setex(key, expiry_minutes * 60, str(data))
+                self.redis_client.set(key, str(data), expire=expiry_minutes * 60)
             else:
                 self._memory_store[key] = data
             
@@ -71,7 +71,7 @@ class EmailService:
             }
             
             if self.redis_client:
-                self.redis_client.setex(key, expiry_minutes * 60, str(data))
+                self.redis_client.set(key, str(data), ex=expiry_minutes * 60)
             else:
                 self._memory_store[key] = data
             

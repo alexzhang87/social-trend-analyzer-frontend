@@ -36,7 +36,7 @@ class CreditExpiryService:
         
         # 缓存结果
         try:
-            redis_client.setex(cache_key, self.cache_ttl, valid_balance)
+            redis_client.set(cache_key, valid_balance, expire=self.cache_ttl)
         except Exception as e:
             logger.warning(f"Redis cache set error: {e}")
         
@@ -316,22 +316,28 @@ class CreditExpiryService:
     def batch_update_user_credits(self, user_ids: List[int], db: Session):
         """批量更新多个用户的积分缓存"""
         try:
-            pipe = redis_client.pipeline()
-            
             for user_id in user_ids:
                 # 计算有效积分
                 valid_credits = self._calculate_valid_credits(user_id, db)
                 cache_key = f"{self.cache_prefix}valid_credits:{user_id}"
                 
-                # 批量设置缓存
-                pipe.setex(cache_key, self.cache_ttl, valid_credits)
+                # 设置缓存
+                redis_client.set(cache_key, valid_credits, expire=self.cache_ttl)
                 
-                # 记录用户缓存键
+                # 记录用户缓存键（使用JSON列表代替集合）
                 user_keys_set = f"{self.user_cache_keys}{user_id}"
-                pipe.sadd(user_keys_set, cache_key)
-                pipe.expire(user_keys_set, self.cache_ttl)
+                try:
+                    existing = redis_client.get(user_keys_set) or []
+                    if isinstance(existing, str):
+                        import json
+                        existing = json.loads(existing)
+                    if cache_key not in existing:
+                        existing.append(cache_key)
+                    import json
+                    redis_client.set(user_keys_set, json.dumps(existing), expire=self.cache_ttl)
+                except Exception as e:
+                    logger.warning(f"Update user cache keys error: {e}")
             
-            pipe.execute()
             logger.info(f"Batch updated credits cache for {len(user_ids)} users")
             
         except Exception as e:
@@ -345,7 +351,7 @@ class CreditExpiryService:
             cached_data = redis_client.get(cache_key)
             if cached_data:
                 import json
-                return json.loads(cached_data)
+                return cached_data if isinstance(cached_data, dict) else json.loads(cached_data)
         except Exception as e:
             logger.warning(f"Cache get error: {e}")
         
@@ -354,7 +360,7 @@ class CreditExpiryService:
         
         try:
             import json
-            redis_client.setex(cache_key, self.cache_ttl, json.dumps(breakdown, default=str))
+            redis_client.set(cache_key, json.dumps(breakdown, default=str), expire=self.cache_ttl)
         except Exception as e:
             logger.warning(f"Cache set error: {e}")
         
